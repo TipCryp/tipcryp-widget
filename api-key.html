@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+<link rel="manifest" href="/site.webmanifest"/>
+<meta property="og:image" content="/og-image.jpg"/>
     <!-- ══════════════════════════════════════════════
          TIPCRYP SECURITY HEADERS — MAY 2026 v4.0
          OWASP Top 10 2025 · Mozilla Observatory A+
@@ -810,6 +816,24 @@ button, a, select, input, label {
         <button class="w-send-btn" id="w-sendBtn" onclick="wHandleSend()">
           &#10230; PAY $100 — GET API KEY
         </button>
+
+        <!-- BETA CODE ACCESS -->
+        <div style="text-align:center;margin-top:10px;">
+          <button onclick="tcmToggleBeta()" id="beta-toggle-btn" style="background:none;border:none;color:#475569;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.68rem;text-decoration:none;padding:4px;transition:color .2s;" onmouseover="this.style.color='#94a3b8'" onmouseout="this.style.color='#475569'">Have a beta access code?</button>
+        </div>
+        <div id="beta-input-wrap" style="display:none;margin-top:10px;">
+          <div style="background:rgba(34,211,238,.03);border:1px solid rgba(34,211,238,.15);border-radius:10px;padding:14px 16px;">
+            <label style="font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:#22d3ee;font-weight:700;display:block;margin-bottom:8px;">Beta Access Code</label>
+            <div style="display:flex;gap:8px;">
+              <input type="text" id="beta-code-input" placeholder="TCM-BETA-26-XXXXXXXX" maxlength="20"
+                style="flex:1;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.08);border-radius:7px;color:#fff;font-family:'JetBrains Mono',monospace;font-size:.85rem;padding:10px 12px;outline:none;text-transform:uppercase;"
+                oninput="this.value=this.value.toUpperCase()"
+                onkeydown="if(event.key==='Enter')tcmRedeemBeta()"/>
+              <button onclick="tcmRedeemBeta()" style="background:#22d3ee;color:#000;border:none;border-radius:7px;font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:700;padding:10px 16px;cursor:pointer;white-space:nowrap;">Redeem</button>
+            </div>
+            <p id="beta-msg" style="font-family:'JetBrains Mono',monospace;font-size:.65rem;margin-top:7px;display:none;"></p>
+          </div>
+        </div>
         <div class="w-tx-result" id="w-txResult">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
             <span style="color:#4ade80;font-size:1.3rem;">&#10003;</span>
@@ -1149,8 +1173,11 @@ button, a, select, input, label {
 
 
 <footer style="border-top:1px solid rgba(255,255,255,.05);background:#060810;padding:20px 24px;text-align:center;">
-  <p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#1e293b;">
-    © 2026 TipCryp · tipcryp.me · <a href="https://tipcryp.io" style="color:#94a3b8;text-decoration:none;">$TCM ICO</a> · <a href="https://t.me/+WtbDPLuRTLE4NTQx" target="_blank" rel="noopener noreferrer" style="color:#4ade80;text-decoration:none;">Telegram</a>
+  <p style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#94a3b8;margin-bottom:8px;">
+    Questions or support? <a href="mailto:tcsales@tipcryp.io" style="color:#22d3ee;text-decoration:none;font-weight:700;">tcsales@tipcryp.io</a>
+  </p>
+  <p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#475569;">
+    &copy; 2026 TipCryp AG &middot; Zug, Switzerland &middot; <a href="https://tipcryp.io" style="color:#94a3b8;text-decoration:none;">$TCM ICO</a> &middot; <a href="https://t.me/+WtbDPLuRTLE4NTQx" target="_blank" rel="noopener noreferrer" style="color:#4ade80;text-decoration:none;">Telegram</a> &middot; <a href="terms.html" style="color:#94a3b8;text-decoration:none;">Terms</a> &middot; <a href="privacy.html" style="color:#94a3b8;text-decoration:none;">Privacy</a> &middot; All Rights Reserved
   </p>
 </footer>
 
@@ -1611,7 +1638,39 @@ button, a, select, input, label {
         if(bc) { bc.innerHTML = '③ Dashboard'; bc.style.color = '#4ade80'; }
     };
 
-    const _wcb=document.getElementById('w-connectBtn');if(_wcb)_wcb.style.display='none';
+
+    // ══════════════════════════════════════════════
+    // BETA CODE SYSTEM
+    // ══════════════════════════════════════════════
+    (function(){
+      var _K=[0x54,0x43,0x4D,0x42,0x45,0x54,0x41,0x32,0x36];
+      var _OB=["0000006f071115731b667560041c607178796717","0000006f071115731b667560087d1e0b70730c02","0000006f071115731b66756014770111037b601a","0000006f071115731b66756001046602060f1173","0000006f071115731b667560037d60707f001170","0000006f071115731b6675600009640c0100120b","0000006f071115731b6675607713150c71791a75","0000006f071115731b667560067c1804717a1916","0000006f071115731b6675607016197778626474","0000006f071115731b667560160263186607050c","0000006f071115731b6675601072650f6a771b05","0000006f071115731b66756074030c167b000106","0000006f071115731b6675600c0f661671036513","0000006f071115731b6675600715030d766e0e02","0000006f071115731b6675600a0d04797b706611","0000006f071115731b6675600608010d677c0d72","0000006f071115731b66756017016615767f031a","0000006f071115731b6675601273020260016512","0000006f071115731b6675601a7d65137e65060d","0000006f071115731b6675600e12120674076700","0000006f071115731b6675607709111573611d08","0000006f071115731b667560107d6172007f127a","0000006f071115731b6675601b701006057d0d74","0000006f071115731b66756071110c0a707a6411","0000006f071115731b6675600f17190d6a721a17","0000006f071115731b6675607b7c1c0f7f7a1106","0000006f071115731b667560131f161902661e13","0000006f071115731b6675601b750472637e617b","0000006f071115731b66756004711f0477736573","0000006f071115731b6675607a7d611505061500","0000006f071115731b66756072061e087766020c","0000006f071115731b667560000e05120b6e0c16","0000006f071115731b6675600c77630f71070407","0000006f071115731b6675600106131560030707","0000006f071115731b66756008771b0f0363671b","0000006f071115731b667560730d660c0a0f0312","0000006f071115731b6675607a1f1a020b601005","0000006f071115731b66756003726d170b726c70","0000006f071115731b6675601b7166130a60667b","0000006f071115731b667560091d601b7a02630d","0000006f071115731b6675600b0807136179040d","0000006f071115731b667560070c04096a701204","0000006f071115731b667560007215147b630717","0000006f071115731b66756017700d076804027b","0000006f071115731b6675601077031407750008","0000006f071115731b6675607a7d05790a001a15","0000006f071115731b6675600913611763046c16","0000006f071115731b6675600806011260786773","0000006f071115731b6675600e1066777e770512","0000006f071115731b66756071090372667a0510"];
+
+      function _dec(h){var b=[];for(var i=0;i<h.length;i+=2)b.push(parseInt(h.substr(i,2),16));return b.map(function(v,i){return String.fromCharCode(v^_K[i%_K.length]);}).join('');}
+      function _all(){return _OB.map(_dec);}
+      function _getUsed(){try{var u=localStorage.getItem('tcm_bu');return u?JSON.parse(u):[];}catch(e){return[];}}
+      function _markUsed(c,n,e){try{var u=_getUsed();u.push({code:c,name:n,email:e,date:new Date().toISOString()});localStorage.setItem('tcm_bu',JSON.stringify(u));}catch(ex){}}
+      function _isUsed(c){return _getUsed().some(function(u){return u.code===c;});}
+
+      window.tcmToggleBeta=function(){var w=document.getElementById('beta-input-wrap');if(w)w.style.display=w.style.display==='none'?'block':'none';};
+
+      window.tcmRedeemBeta=function(){
+        var inp=document.getElementById('beta-code-input');
+        var msg=document.getElementById('beta-msg');
+        if(!inp||!msg)return;
+        var code=(inp.value||'').trim().toUpperCase();
+        if(!code){msg.textContent='Please enter your beta code.';msg.style.color='#f87171';msg.style.display='block';return;}
+        if(typeof window._tcmRateCheck==='function'&&!window._tcmRateCheck('beta')){return;}
+        if(!regData.name||regData.step<2){msg.textContent='Please complete your registration details first.';msg.style.color='#f87171';msg.style.display='block';return;}
+        if(_isUsed(code)){msg.textContent='This code has already been redeemed.';msg.style.color='#f87171';msg.style.display='block';return;}
+        if(_all().indexOf(code)===-1){msg.textContent='Invalid code. Please check and try again.';msg.style.color='#f87171';msg.style.display='block';inp.value='';return;}
+        _markUsed(code,regData.name,regData.email);
+        msg.textContent='Code accepted — generating your API key…';msg.style.color='#4ade80';msg.style.display='block';
+        setTimeout(function(){wShowConfirmPage('BETA-'+code,'BETA',0);},800);
+      };
+    })();
+
+        const _wcb=document.getElementById('w-connectBtn');if(_wcb)_wcb.style.display='none';
     window.addEventListener('DOMContentLoaded',()=>{
         wFetchPrices();
         setInterval(wFetchPrices,60000);
@@ -1630,7 +1689,33 @@ button, a, select, input, label {
   /* ── 1. IFRAME / CLICKJACKING ── */
   if(w.self!==w.top){
     try{w.top.location=w.self.location;}catch(e){}
-    d.documentElement.innerHTML='<body style="background:#050709;display:flex;align-items:center;justify-content:center;height:100vh;font-family:monospace;text-align:center;"><div><h1 style="color:#f87171;font-size:2rem;">Clickjacking Blocked</h1><p style="color:#cbd5e1;margin:1rem 0;">This page cannot be loaded in a frame.</p><a href="https://tipcryp.me" style="color:#22d3ee;">Go to tipcryp.me</a></div></body>';
+    d.documentElement.innerHTML='<body style="background:#050709;display:flex;align-items:center;justify-content:center;height:100vh;font-family:monospace;text-align:center;"><div><h1 style="color:#f87171;font-size:2rem;">Clickjacking Blocked</h1><p style="color:#cbd5e1;margin:1rem 0;">This page cannot be loaded in a frame.</p><a href="https://tipcryp.me" style="color:#22d3ee;">Go to tipcryp.me</a></div>
+<script id="tcm-src-protect">
+(function(){
+  // Disable right-click
+  document.addEventListener('contextmenu',function(e){e.preventDefault();});
+  // Disable common keyboard shortcuts to view source / devtools
+  document.addEventListener('keydown',function(e){
+    if(e.key==='F12'){e.preventDefault();return false;}
+    if(e.ctrlKey&&e.shiftKey&&['I','J','C','K'].includes(e.key)){e.preventDefault();return false;}
+    if(e.ctrlKey&&e.key==='U'){e.preventDefault();return false;}
+    if(e.ctrlKey&&e.key==='S'){e.preventDefault();return false;}
+  });
+  // Disable drag
+  document.addEventListener('dragstart',function(e){e.preventDefault();});
+  // Console deterrent
+  var _d=new Date().getFullYear();
+  Object.defineProperty(console,'_tcm',{get:function(){
+    console.clear();
+    console.log('%c⚠ TipCryp — Proprietary Code','color:#f87171;font-size:1.2rem;font-weight:900;');
+    console.log('%c© '+_d+' TipCryp Ecosystem. Unauthorised copying or redistribution is prohibited.','color:#64748b;font-size:.85rem;');
+    return undefined;
+  }});
+  // Trigger the defineProperty on load
+  void console._tcm;
+})();
+</script>
+</body>';
     return;
   }
 
