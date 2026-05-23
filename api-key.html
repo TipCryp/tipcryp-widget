@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+    <!-- ══════════════════════════════════════════════
+         TIPCRYP SECURITY HEADERS — MAY 2026 v4.0
+         OWASP Top 10 2025 · Mozilla Observatory A+
+         CWE-79, CWE-352, CWE-693, CWE-1021 mitigated
+    ═══════════════════════════════════════════════ -->
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://fonts.googleapis.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://api.coinlore.net https://api.binance.com https://mainnet.base.org https://polygon-rpc.com https://api.etherscan.io https://basescan.org https://api.polygonscan.com https://rpc.ankr.com wss://mainnet.base.org wss://polygon-rpc.com; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; block-all-mixed-content;"/>
+    <meta http-equiv="X-Frame-Options"              content="DENY"/>
+    <meta http-equiv="X-Content-Type-Options"       content="nosniff"/>
+    <meta http-equiv="Referrer-Policy"              content="strict-origin-when-cross-origin"/>
+    <meta http-equiv="Cross-Origin-Opener-Policy"   content="same-origin"/>
+    <meta http-equiv="Cross-Origin-Embedder-Policy" content="unsafe-none"/>
+    <!-- Cross-Origin-Resource-Policy removed to allow CDN resources -->
+    <meta http-equiv="Permissions-Policy"
+          content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=(), screen-capture=(), display-capture=(), web-share=(), bluetooth=(), serial=(), hid=(), nfc=(), xr-spatial-tracking=(), clipboard-read=(), interest-cohort=()"/>
+    <meta http-equiv="X-XSS-Protection" content="0"/>
+    <meta name="robots"   content="noarchive, nosnippet"/>
+    <meta name="referrer" content="strict-origin-when-cross-origin"/>
+    <!-- ══ END SECURITY HEADERS v4.0 ══ -->
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="theme-color" content="#080b10"/>
+<title>TipCryp API Key | Creator Dashboard</title>
+<meta name="description" content="Get your TipCryp API key. Register, verify your Creator Pass or $TCM holdings, and embed the crypto tipping widget on your site in minutes."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+
+<style>
+:root {
+  --cyan:   #22d3ee;
+  --cyan2:  #67e8f9;
+  --green:  #4ade80;
+  --amber:  #f59e0b;
+  --red:    #f87171;
+  --bg:     #080b10;
+  --bg2:    #0d1117;
+  --panel:  #111620;
+  --panel2: #161c28;
+  --border: rgba(255,255,255,0.06);
+  --border2:rgba(34,211,238,0.15);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:#e2e8f0;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+.grid-bg{
+  background-image:
+    linear-gradient(rgba(34,211,238,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(34,211,238,0.025) 1px,transparent 1px);
+  background-size:48px 48px;
+}
+.font-display{font-family:'Urbanist',sans-serif;}
+.font-mono{font-family:'JetBrains Mono',monospace;}
+
+/* ── Panel ── */
+.panel{
+  background:linear-gradient(135deg,rgba(17,22,32,0.98),rgba(13,17,23,0.98));
+  border:1px solid var(--border);
+  border-radius:16px;
+}
+.panel-cyan{
+  background:linear-gradient(135deg,rgba(17,22,32,0.98),rgba(13,17,23,0.98));
+  border:1px solid var(--border2);
+  border-radius:16px;
+  box-shadow:0 0 40px -15px rgba(34,211,238,0.18);
+}
+
+/* ── Inputs ── */
+.field-label{
+  display:block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.65rem;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:#475569;
+  margin-bottom:8px;
+}
+.field-input{
+  width:100%;
+  background:rgba(0,0,0,0.45);
+  border:1px solid var(--border);
+  border-radius:10px;
+  color:#fff;
+  font-family:'DM Sans',sans-serif;
+  font-size:.95rem;
+  padding:13px 16px;
+  outline:none;
+  transition:border-color .2s, box-shadow .2s;
+}
+.field-input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(34,211,238,.10);}
+.field-input::placeholder{color:#2d3a4a;}
+.field-input.error{border-color:rgba(248,113,113,.5);}
+.field-input.success{border-color:rgba(74,222,128,.4);}
+
+/* ── Select ── */
+.field-select{
+  width:100%;
+  appearance:none;-webkit-appearance:none;
+  background:rgba(0,0,0,0.45);
+  border:1px solid var(--border);
+  border-radius:10px;
+  color:#fff;
+  font-family:'DM Sans',sans-serif;
+  font-size:.95rem;
+  padding:13px 40px 13px 16px;
+  outline:none;
+  cursor:pointer;
+  transition:border-color .2s, box-shadow .2s;
+}
+.field-select:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(34,211,238,.10);}
+.select-wrap{position:relative;}
+.select-wrap::after{
+  content:'▾';
+  position:absolute;right:14px;top:50%;
+  transform:translateY(-50%);
+  color:var(--cyan);font-size:.9rem;
+  pointer-events:none;
+}
+
+/* ── Buttons ── */
+.btn-primary{
+  width:100%;
+  background:var(--cyan);
+  color:#000;
+  font-family:'Urbanist',sans-serif;
+  font-weight:800;
+  font-size:.85rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  border:none;
+  border-radius:10px;
+  padding:15px;
+  cursor:pointer;
+  transition:background .2s, box-shadow .2s, transform .15s;
+  box-shadow:0 0 24px rgba(34,211,238,.28);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-primary:hover{background:var(--cyan2);box-shadow:0 0 36px rgba(34,211,238,.45);transform:translateY(-1px);}
+.btn-primary:disabled{background:#1e2a35;color:#4a6070;box-shadow:none;cursor:not-allowed;transform:none;}
+
+.btn-ghost{
+  background:transparent;
+  border:1px solid var(--border2);
+  color:var(--cyan);
+  font-family:'JetBrains Mono',monospace;
+  font-size:.75rem;
+  border-radius:8px;
+  padding:9px 18px;
+  cursor:pointer;
+  transition:background .2s;
+  text-decoration:none;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.btn-ghost:hover{background:rgba(34,211,238,.07);}
+
+/* ── Steps ── */
+.step-dot{
+  width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.75rem;font-weight:700;
+  flex-shrink:0;
+  transition:all .3s;
+}
+.step-dot.active{background:var(--cyan);color:#000;}
+.step-dot.done{background:rgba(74,222,128,.15);border:1px solid rgba(74,222,128,.4);color:#4ade80;}
+.step-dot.inactive{background:rgba(255,255,255,.04);border:1px solid var(--border);color:#475569;}
+.step-connector{width:2px;height:24px;margin:4px auto;background:var(--border);transition:background .3s;}
+.step-connector.active{background:var(--cyan);}
+
+/* ── API key display ── */
+.api-key-box{
+  background:rgba(0,0,0,.6);
+  border:1px solid rgba(34,211,238,.25);
+  border-radius:12px;
+  padding:18px 20px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.82rem;
+  color:var(--cyan);
+  word-break:break-all;
+  letter-spacing:.03em;
+  position:relative;
+  cursor:pointer;
+  transition:border-color .2s;
+  line-height:1.8;
+}
+.api-key-box:hover{border-color:rgba(34,211,238,.5);}
+
+/* ── Plan toggle ── */
+.plan-card{
+  border:2px solid var(--border);
+  border-radius:14px;
+  padding:20px;
+  cursor:pointer;
+  transition:border-color .25s, background .25s;
+}
+.plan-card:hover{border-color:rgba(34,211,238,.25);}
+.plan-card.selected{border-color:var(--cyan);background:rgba(34,211,238,.04);}
+.plan-radio{display:none;}
+
+/* ── Code snippet ── */
+.code-block{
+  background:rgba(0,0,0,.6);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:16px 18px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.75rem;
+  color:#94a3b8;
+  overflow-x:auto;
+  line-height:1.8;
+}
+.code-block .kw{color:var(--cyan);}
+.code-block .str{color:#4ade80;}
+.code-block .cm{color:#334155;}
+
+/* ── Toast ── */
+#toast{
+  position:fixed;bottom:2rem;left:50%;
+  transform:translateX(-50%) translateY(80px);
+  background:var(--panel2);
+  border:1px solid var(--border);
+  border-radius:12px;padding:12px 22px;
+  font-family:'JetBrains Mono',monospace;font-size:.78rem;
+  color:#e2e8f0;z-index:999;
+  transition:transform .35s,opacity .35s;
+  opacity:0;pointer-events:none;
+  max-width:360px;text-align:center;
+}
+#toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+#toast.success{border-color:rgba(74,222,128,.4);color:var(--green);}
+#toast.error{border-color:rgba(248,113,113,.4);color:var(--red);}
+#toast.info{border-color:var(--border2);color:var(--cyan);}
+
+/* ── Pulse dot ── */
+.pulse-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pdot 2s infinite;flex-shrink:0;}
+@keyframes pdot{0%,100%{opacity:1;}50%{opacity:.4;}}
+
+/* ── Fade in ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.fade-in{animation:fadeUp .6s ease both;}
+.d1{animation-delay:.1s;}.d2{animation-delay:.22s;}.d3{animation-delay:.36s;}
+
+/* ── Tab system ── */
+.tab-btn{
+  padding:10px 20px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.72rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  background:transparent;
+  border:1px solid var(--border);
+  border-radius:8px;
+  color:#475569;
+  cursor:pointer;
+  transition:all .2s;
+}
+.tab-btn.active{background:rgba(34,211,238,.08);border-color:var(--border2);color:var(--cyan);}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* ── Progress bar ── */
+.progress-track{background:rgba(255,255,255,.05);border-radius:999px;height:6px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,#0891b2,#22d3ee);border-radius:999px;transition:width .5s ease;}
+
+/* ── Nav ── */
+nav{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(20px);
+  background:rgba(8,11,16,.92);
+  border-bottom:1px solid rgba(255,255,255,.05);
+  padding:0 24px;height:64px;
+  display:flex;align-items:center;
+}
+.nav-inner{
+  max-width:1100px;width:100%;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+</style>
+
+
+<style id="tcm-protection-css">
+/* ── TipCryp Copy + Source Protection 2026 ── */
+
+/* Disable image drag only */
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  pointer-events: none;
+}
+a img, button img { pointer-events: auto; }
+/* SVGs inside buttons pass clicks through to the button */
+button svg, label svg, a svg { pointer-events: none; }
+/* Wallet buttons — guarantee clickable in all browsers */
+/* Wallet buttons handled by widget CSS block below */
+button, a, select, input, label {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+/* Print watermark */
+@media print {
+  body::before {
+    content: "TipCryp Official — tipcryp.io — Confidential";
+    position: fixed;
+    top: 40%; left: 50%;
+    transform: translate(-50%, -50%) rotate(-35deg);
+    font-size: 3rem;
+    font-weight: 900;
+    color: rgba(34, 211, 238, 0.06);
+    z-index: 999999;
+    pointer-events: none;
+    white-space: nowrap;
+    font-family: monospace;
+    letter-spacing: .15em;
+  }
+  nav, footer, .no-print,
+  #tcm-verify-banner, #me-verify-banner,
+  .ticker-wrap { display: none !important; }
+}
+
+/* Disable highlight colour (makes selection less obvious) */
+::selection      { background: rgba(34,211,238,0.15); color: inherit; }
+::-moz-selection { background: rgba(34,211,238,0.15); color: inherit; }
+
+/* ── Mobile Nav ── */
+.tcm-hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;}
+@media(min-width:768px){.tcm-hamburger{display:none;}}
+.tcm-hamburger span{display:block;width:22px;height:2px;background:#94a3b8;border-radius:2px;transition:all .3s;}
+.tcm-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);background:#22d3ee;}
+.tcm-hamburger.open span:nth-child(2){opacity:0;}
+.tcm-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);background:#22d3ee;}
+.tcm-mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(8,11,16,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:48;padding:1.5rem;flex-direction:column;gap:0;border-top:1px solid rgba(255,255,255,0.06);overflow-y:auto;}
+.tcm-mobile-menu.open{display:flex;}
+@media(min-width:768px){.tcm-mobile-menu{display:none!important;}}
+.tcm-mobile-menu a{font-family:'Urbanist','DM Sans',sans-serif;font-size:1.05rem;font-weight:600;color:#64748b;text-decoration:none;padding:13px 0;border-bottom:1px solid rgba(255,255,255,0.05);transition:color .2s;display:flex;align-items:center;gap:10px;}
+.tcm-mobile-menu a:hover,.tcm-mobile-menu a.active{color:#22d3ee;}
+.tcm-mob-social{display:flex;gap:16px;padding-top:18px;margin-top:6px;}
+.tcm-mob-social a{border:none!important;padding:6px 0!important;color:#475569!important;font-size:.85rem!important;}
+.tcm-mob-social a:hover{color:#22d3ee!important;}
+.tcm-mobile-cta{margin-top:18px;display:flex;align-items:center;justify-content:center;gap:7px;background:#22d3ee;color:#000;font-family:'Urbanist','DM Sans',sans-serif;font-weight:800;font-size:.9rem;letter-spacing:.04em;text-transform:uppercase;border:none;border-radius:10px;padding:14px 24px;cursor:pointer;text-decoration:none;width:100%;}
+.tcm-social-icons{display:none;}
+@media(min-width:900px){.tcm-social-icons{display:flex;}}
+/* ── Light text fix — all muted text slightly lighter ── */
+.text-gray-500,.font-mono.text-gray-500{color:#6b7280!important;}
+.text-gray-400{color:#9ca3af!important;}
+.text-gray-600{color:#6b7280!important;}
+[style*="color:#475569"]{color:#64748b!important;}
+[style*="color:#334155"]{color:#475569!important;}
+
+        /* ══ WALLET BUTTON + WIDGET STYLES ══ */
+        .w-wallet-btn svg{width:28px;height:28px;flex-shrink:0;overflow:visible;display:block;pointer-events:none;}
+        .w-wallet-btn{display:flex;align-items:center;gap:9px;padding:11px 13px;background:#0a0a0a;border:1px solid #1e1e1e;border-radius:10px;color:#fff;font-family:'JetBrains Mono',monospace;font-size:.88rem;cursor:pointer !important;pointer-events:auto !important;transition:border-color .2s,background .2s,box-shadow .2s,transform .1s;text-align:left;white-space:nowrap;width:100%;touch-action:manipulation;-webkit-tap-highlight-color:rgba(34,211,238,.15);}
+        .w-wallet-btn *{pointer-events:none !important;}
+        .w-wallet-btn:hover{border-color:#22d3ee;background:#0a1418;box-shadow:0 0 14px rgba(34,211,238,.15);transform:translateY(-1px);}
+        .w-wallet-btn.connected{border-color:#4ade80;box-shadow:0 0 10px rgba(74,222,128,.2);}
+        .w-wallet-btn-name{flex:1;font-size:.9rem;color:#e2e8f0;}
+        .w-status-dot{width:7px;height:7px;border-radius:50%;background:#1e1e1e;flex-shrink:0;transition:background .3s;}
+        .w-wallet-btn.connected .w-status-dot{background:#4ade80;}
+        .w-wallet-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+        .w-connected-bar{display:none;align-items:center;gap:6px;background:#050505;border:1px solid rgba(74,222,128,.25);border-radius:8px;padding:9px 12px;font-size:.78rem;margin-top:8px;font-family:'JetBrains Mono',monospace;}
+        .w-connected-bar.show{display:flex;}
+        .w-pulse-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;animation:wPulse 2s infinite;flex-shrink:0;}
+        @keyframes wPulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+        .w-wallet-label{color:#4ade80;flex-shrink:0;font-weight:700;}
+        .w-addr-text{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#94a3b8;}
+        .w-disconnect-btn{background:none;border:1px solid #333;border-radius:4px;color:#666;font-size:.7rem;padding:3px 8px;cursor:pointer;font-family:'JetBrains Mono',monospace;transition:border-color .2s,color .2s;flex-shrink:0;}
+        .w-disconnect-btn:hover{border-color:#f87171;color:#f87171;}
+        .w-select-wrap{position:relative;}
+        .w-select-wrap::after{content:'▾';position:absolute;right:12px;top:50%;transform:translateY(-50%);color:#22d3ee;font-size:.9rem;pointer-events:none;}
+        .w-select{width:100%;appearance:none;-webkit-appearance:none;background:#000;color:#fff;border:1px solid #1e1e1e;border-radius:8px;padding:12px 32px 12px 13px;font-family:'JetBrains Mono',monospace;font-size:.9rem;cursor:pointer;outline:none;transition:border-color .2s;}
+        .w-select:hover,.w-select:focus{border-color:#22d3ee;box-shadow:0 0 0 3px rgba(34,211,238,.1);}
+        .w-select option{background:#0a0a0a;color:#fff;}
+        .w-amount-wrap{position:relative;}
+        .w-amount-wrap input{width:100%;background:rgba(34,211,238,.04);color:#fff;border:1px solid rgba(34,211,238,.2);border-radius:8px;padding:13px 64px 13px 13px;font-family:'JetBrains Mono',monospace;font-size:1.1rem;outline:none;cursor:default;}
+        .w-amount-unit{position:absolute;right:13px;top:50%;transform:translateY(-50%);color:#22d3ee;font-family:'JetBrains Mono',monospace;font-size:.84rem;font-weight:700;pointer-events:none;}
+        .w-address-display{background:#050505;border:1px dashed #1e1e1e;border-radius:6px;padding:9px 12px;font-size:.8rem;color:#555;font-family:'JetBrains Mono',monospace;word-break:break-all;min-height:2.4rem;transition:color .3s,border-color .3s;line-height:1.6;}
+        .w-address-display.active{color:#4ade80;border-color:rgba(74,222,128,.2);}
+        .w-send-btn{width:100%;padding:14px;background:#22d3ee;color:#000;border:none;border-radius:8px;font-family:'Urbanist',sans-serif;font-weight:900;font-size:.96rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s,box-shadow .2s,transform .1s;box-shadow:0 0 24px rgba(34,211,238,.3);}
+        .w-send-btn:hover{background:#67e8f9;box-shadow:0 0 36px rgba(34,211,238,.5);transform:translateY(-1px);}
+        .w-send-btn:active{transform:translateY(0);}
+        .w-field-label{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:#22d3ee;margin-bottom:8px;display:block;}
+        .w-divider{border:none;border-top:1px solid rgba(255,255,255,.05);margin:2px 0;}
+        .w-toggle-row{display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(17,20,27,.7);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:11px 15px;}
+        .w-tx-result{display:none;background:rgba(74,222,128,.05);border:1px solid rgba(74,222,128,.2);border-radius:10px;padding:14px 16px;}
+        .w-tx-result.show{display:block;}
+        #widget-panel{background:linear-gradient(to bottom,rgba(17,20,27,.97),rgba(10,12,18,.97));border:1px solid rgba(34,211,238,.2);border-radius:24px;padding:22px;width:100%;position:relative;box-shadow:0 0 45px -12px rgba(34,211,238,.28);}
+        .w-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:200;align-items:center;justify-content:center;padding:1rem;}
+        .w-modal-overlay.show{display:flex;}
+        .w-modal{background:#0d0d0d;border:1px solid #2a2a2a;border-radius:14px;padding:1.5rem;width:100%;max-width:360px;position:relative;}
+        .w-modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
+        .w-modal h3{font-family:'Urbanist',sans-serif;font-size:.92rem;color:#22d3ee;font-weight:700;}
+        .w-modal-close{background:none;border:1px solid #333;border-radius:6px;color:#666;width:28px;height:28px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;}
+        .w-modal-close:hover{color:#fff;border-color:#666;}
+        .w-modal-note{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#475569;margin-top:.75rem;border-top:1px solid #1a1a1a;padding-top:.75rem;word-break:break-all;}
+
+</style>
+    <!-- SEO: Creator API -->
+    <meta name="keywords" content="crypto tipping widget, streamer crypto API, accept crypto payments stream, Twitch crypto donations, YouTube crypto tips, no fee streaming payments, embed crypto tip jar"/>
+    <meta name="author" content="TipCryp Ecosystem"/>
+    <meta property="og:site_name" content="TipCryp"/>
+    <meta property="og:locale" content="en_US"/>
+    <link rel="canonical" href="https://tipcryp.io/api-key.html"/>
+</head>
+
+<div id="mobile-menu" style="display:none;"></div>
+<body class="grid-bg">
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+      <a href="index.html" style="font-family:'Urbanist',sans-serif;font-size:1.75rem;font-weight:900;color:#fff;text-decoration:none;letter-spacing:-.03em;line-height:1;">tip<span style="color:var(--cyan)">cryp</span><span style="color:#fff;font-size:1rem;font-weight:500;">.me</span></a>
+      <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.22);color:#22d3ee;font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;padding:3px 10px;border-radius:999px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;"><span style="width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px #4ade80;animation:pdot 2s infinite;display:inline-block;"></span>Live Platform</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <button id="hamburger-btn" style="display:none;" aria-label="Menu"></button>
+      <a href="index.html" style="font-family:'DM Sans',sans-serif;font-size:.85rem;color:#64748b;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748b'">Home</a>
+      <a href="api-key.html" style="font-family:'DM Sans',sans-serif;font-size:.85rem;color:#22d3ee;text-decoration:none;font-weight:600;">API Key</a>
+      <a href="https://t.me/+WtbDPLuRTLE4NTQx" target="_blank" rel="noopener noreferrer" style="font-family:'DM Sans',sans-serif;font-size:.85rem;color:#4ade80;text-decoration:none;">Telegram</a>
+      <a href="https://tipcryp.io" rel="noopener noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#475569;text-decoration:none;">$TCM ICO →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── JOURNEY BREADCRUMB ── -->
+<div style="background:rgba(8,11,16,0.97);border-bottom:1px solid rgba(255,255,255,0.04);padding:10px 24px;">
+  <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+    <a href="index.html" style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#475569;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#22d3ee'" onmouseout="this.style.color='#475569'">tipcryp.me</a>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#1e293b;">›</span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#22d3ee;font-weight:700;">Get API Key</span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#1e293b;">›</span>
+    <span id="bc-step" style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#475569;">① Register &amp; Pay</span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#1e293b;">›</span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#1e293b;">② Confirmation</span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#1e293b;">›</span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#1e293b;">③ Dashboard</span>
+    <span style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#334155;">🔒 Secure Checkout</span>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<header style="max-width:1100px;margin:0 auto;padding:60px 24px 40px;text-align:center;" class="fade-in">
+  <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.22);border-radius:999px;padding:5px 16px;margin-bottom:20px;font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--cyan);text-transform:uppercase;letter-spacing:.08em;">
+    <span class="pulse-dot"></span>
+    Creator Dashboard — Get Your API Key
+  </div>
+  <h1 style="font-family:'Urbanist',sans-serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:900;color:#fff;letter-spacing:-.03em;line-height:1.05;margin-bottom:14px;">
+    Your Widget. Your Wallet.<br/><span style="color:var(--cyan)">Zero Middlemen.</span>
+  </h1>
+  <p style="font-size:1rem;color:#64748b;max-width:460px;margin:0 auto;line-height:1.8;">
+    Set up in under 5 minutes. Complete your details on the left, then pay via the console on the right to receive your API key instantly.
+  </p>
+</header>
+
+<!-- ══ MAIN GRID ══ -->
+<main class="page-wrap fade-in d2" style="padding:0 24px 40px;display:grid;grid-template-columns:minmax(0,480px) minmax(0,560px);gap:32px;align-items:start;justify-content:center;">
+
+    <!-- ════ LEFT: REGISTRATION + QR STREAM INFO ════ -->
+  <div style="display:flex;flex-direction:column;gap:20px;" class="fade-in d3">
+
+    <!-- Registration form — drives the payment console -->
+    <div class="panel-cyan" style="padding:26px;">
+
+      <!-- Step indicator -->
+      <div style="display:flex;align-items:center;gap:0;margin-bottom:20px;">
+        <div style="display:flex;align-items:center;gap:6px;flex:1;">
+          <div id="reg-dot-1" style="width:28px;height:28px;border-radius:50%;background:var(--cyan);color:#000;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;">1</div>
+          <div style="height:2px;flex:1;background:rgba(255,255,255,.08);" id="reg-line-1"></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;flex:1;">
+          <div id="reg-dot-2" style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#475569;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;">2</div>
+          <div style="height:2px;flex:1;background:rgba(255,255,255,.08);" id="reg-line-2"></div>
+        </div>
+        <div id="reg-dot-3" style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#475569;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;">3</div>
+      </div>
+
+      <!-- STEP 1 -->
+      <div id="reg-step-1">
+        <h3 style="font-family:'Urbanist',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:16px;">Account Details</h3>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div>
+            <label class="field-label" for="reg-name">Creator / Channel Name</label>
+            <input type="text" id="reg-name" class="field-input" placeholder="Your stream name or brand"/>
+          </div>
+          <div>
+            <label class="field-label" for="reg-email">Email Address</label>
+            <input type="email" id="reg-email" class="field-input" placeholder="you@email.com"/>
+            <p style="font-size:.68rem;color:#334155;margin-top:5px;font-family:'JetBrains Mono',monospace;">API key sent here. Not shared externally.</p>
+          </div>
+          <div>
+            <label class="field-label" for="reg-type">Creator Platform</label>
+            <div class="select-wrap">
+              <select id="reg-type" class="field-select">
+                <option value="" disabled selected>— Select your platform —</option>
+                <option value="twitch">Twitch / Kick Streamer</option>
+                <option value="youtube">YouTube Creator</option>
+                <option value="podcaster">Podcaster</option>
+                <option value="musician">Musician / Artist</option>
+                <option value="gamer">Content Creator / Gamer</option>
+                <option value="writer">Writer / Blogger</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn-primary" onclick="regStep2()">Continue to Payment →</button>
+          <div style="text-align:center;margin-top:12px;">
+            <button onclick="previewConfirmPage()" style="background:none;border:none;color:#334155;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.68rem;text-decoration:underline;">Preview confirmation page →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div id="reg-step-2" style="display:none;">
+        <h3 style="font-family:'Urbanist',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:6px;">Choose Access Plan</h3>
+        <p style="font-size:.82rem;color:#64748b;margin-bottom:18px;line-height:1.7;">Annual Creator Pass or hold 2,500 $TCM for free permanent access.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px;">
+          <div class="plan-card selected" id="plan-pay" onclick="selectPlan('pay')">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="font-size:1.1rem;flex-shrink:0;">💳</span>
+              <div style="flex:1;">
+                <p style="font-family:'Urbanist',sans-serif;font-size:.95rem;font-weight:700;color:#fff;">Creator Pass — $100/year</p>
+                <p style="font-size:.75rem;color:#475569;margin-top:2px;">Annual · Unlimited usage · Cancel anytime</p>
+              </div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:var(--cyan);">$100</span>
+            </div>
+          </div>
+          <div class="plan-card" id="plan-tcm" onclick="selectPlan('tcm')">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="font-size:1.1rem;flex-shrink:0;">◈</span>
+              <div style="flex:1;">
+                <p style="font-family:'Urbanist',sans-serif;font-size:.95rem;font-weight:700;color:#fff;">Hold 2,500 $TCM — Free Access</p>
+                <p style="font-size:.75rem;color:#475569;margin-top:2px;">At $0.015 = $37.50 — tokens are yours to keep</p>
+              </div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:var(--green);">FREE</span>
+            </div>
+          </div>
+        </div>
+        <!-- Crypto payment via console -->
+        <div id="pay-section">
+          <div style="background:rgba(34,211,238,.05);border:1px solid rgba(34,211,238,.2);border-radius:12px;padding:16px 18px;margin-bottom:14px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+              <span style="width:32px;height:32px;border-radius:50%;background:rgba(34,211,238,.15);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.8rem;font-weight:700;color:#22d3ee;flex-shrink:0;">→</span>
+              <p style="font-family:'Urbanist',sans-serif;font-size:.95rem;font-weight:700;color:#fff;">Complete payment in the console</p>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div style="display:flex;align-items:flex-start;gap:8px;">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#22d3ee;flex-shrink:0;width:16px;">①</span>
+                <span style="font-size:.85rem;color:#94a3b8;">Connect your wallet using the buttons on the right</span>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px;">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#22d3ee;flex-shrink:0;width:16px;">②</span>
+                <span style="font-size:.85rem;color:#94a3b8;">Select your preferred token (ETH, USDT, BTC, XRP)</span>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px;">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#22d3ee;flex-shrink:0;width:16px;">③</span>
+                <span style="font-size:.85rem;color:#94a3b8;">Amount auto-sets to <strong style="color:#22d3ee;">$100 USD equivalent</strong> — click <strong style="color:#22d3ee;">PAY $100</strong></span>
+              </div>
+            </div>
+          </div>
+          <!-- Registered as label -->
+          <div id="reg-as-label" style="background:rgba(74,222,128,.05);border:1px solid rgba(74,222,128,.15);border-radius:10px;padding:10px 14px;margin-bottom:14px;display:none;">
+            <p style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#4ade80;margin-bottom:2px;">Registering as:</p>
+            <p style="font-size:.88rem;color:#fff;font-weight:600;" id="reg-as-name"></p>
+            <p style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#64748b;" id="reg-as-email"></p>
+          </div>
+          <button onclick="regStep1()" style="background:none;border:none;color:#475569;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.72rem;text-decoration:underline;">← Edit details</button>
+        </div>
+        <!-- TCM verify -->
+        <div id="tcm-section" style="display:none;">
+          <div id="tcm-connected-bar" style="display:none;align-items:center;gap:8px;background:rgba(74,222,128,.05);border:1px solid rgba(74,222,128,.18);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-family:'JetBrains Mono',monospace;font-size:.7rem;">
+            <span class="pulse-dot"></span>
+            <span id="tcm-wallet-label" style="color:var(--green);font-weight:700;"></span>
+            <span id="tcm-wallet-addr" style="color:#475569;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
+          </div>
+          <button class="btn-primary" id="tcm-connect-btn" onclick="connectTCMWallet()" style="margin-bottom:10px;">Connect Wallet to Verify $TCM Balance</button>
+          <button class="btn-primary" id="tcm-verify-btn" onclick="verifyAndGenerate()" style="display:none;background:var(--green);color:#000;">✓ Verify &amp; Get Free API Key</button>
+          <p style="font-size:.78rem;color:#475569;font-family:'JetBrains Mono',monospace;margin-top:10px;">Don't have 2,500 $TCM? <a href="https://tipcryp.io/invest.html" style="color:var(--cyan);text-decoration:none;">Buy at Stage 2 →</a></p>
+          <button onclick="regStep1()" style="background:none;border:none;color:#475569;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.72rem;margin-top:10px;text-decoration:underline;">← Edit details</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Key Generated -->
+      <div id="reg-step-3" style="display:none;">
+        <div style="text-align:center;margin-bottom:20px;">
+          <div style="width:52px;height:52px;border-radius:50%;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:1.6rem;">✓</div>
+          <h2 style="font-family:'Urbanist',sans-serif;font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:4px;">API Key Generated</h2>
+          <p style="font-size:.8rem;color:#64748b;">Copy and store it securely — also sent to your email.</p>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+          <span class="field-label" style="margin:0;">Your API Key</span>
+          <button onclick="copyKey()" style="background:none;border:none;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:.68rem;cursor:pointer;">⧉ Copy</button>
+        </div>
+        <div class="api-key-box" id="api-key-display" onclick="copyKey()">Generating...</div>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#334155;margin-top:6px;">⚠ Do not share this key publicly or commit it to code repositories.</p>
+        <button class="btn-primary" onclick="showDashboard()" style="margin-top:16px;background:var(--green);color:#000;">View Dashboard &amp; Embed Code →</button>
+      </div>
+    </div>
+
+    <!-- Included features -->
+    <div class="panel" style="padding:22px;">
+      <p style="font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:#334155;margin-bottom:14px;">Included With Your Key</p>
+      <div style="display:flex;flex-direction:column;gap:9px;">
+        <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--cyan);width:18px;flex-shrink:0;">✓</span><span style="font-size:.85rem;color:#94a3b8;">Unlimited crypto tips — no transaction limits</span></div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--cyan);width:18px;flex-shrink:0;">✓</span><span style="font-size:.85rem;color:#94a3b8;">ETH · BTC · USDT · SOL · XRP support</span></div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--cyan);width:18px;flex-shrink:0;">✓</span><span style="font-size:.85rem;color:#94a3b8;">QR code generator for stream overlays</span></div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--cyan);width:18px;flex-shrink:0;">✓</span><span style="font-size:.85rem;color:#94a3b8;">Embed on WordPress, Wix, Linktree, any site</span></div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--cyan);width:18px;flex-shrink:0;">✓</span><span style="font-size:.85rem;color:#94a3b8;">Zero platform commission — direct wallet payouts</span></div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--cyan);width:18px;flex-shrink:0;">✓</span><span style="font-size:.85rem;color:#94a3b8;">$TCM staking toggle — auto-compound tips</span></div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--cyan);width:18px;flex-shrink:0;">✓</span><span style="font-size:.85rem;color:#94a3b8;">Priority Telegram support</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ════ RIGHT: PAYMENT CONSOLE — exact tipcryp.me widget ════ -->
+  <div>
+
+    <!-- Order summary -->
+    <div style="background:rgba(34,211,238,.05);border:1px solid rgba(34,211,238,.18);border-radius:14px;padding:20px 22px;margin-bottom:16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+        <div>
+          <p style="font-family:'Urbanist',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;">TipCryp Creator Pass</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:#94a3b8;margin-top:3px;">Annual API licence · Unlimited widget usage</p>
+        </div>
+        <div style="text-align:right;">
+          <p style="font-family:'Urbanist',sans-serif;font-size:1.8rem;font-weight:900;color:#22d3ee;line-height:1;">$100</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#7a96a8;">USD / year</p>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,.06);margin-top:10px;padding-top:10px;display:flex;flex-direction:column;gap:5px;">
+        <div style="display:flex;gap:8px;"><span style="color:#4ade80;flex-shrink:0;">✓</span><span style="font-size:.9rem;color:#c8dae6;">Zero platform commission — direct wallet payouts</span></div>
+        <div style="display:flex;gap:8px;"><span style="color:#4ade80;flex-shrink:0;">✓</span><span style="font-size:.9rem;color:#c8dae6;">ETH · BTC · USDT · XRP · QR codes for streams</span></div>
+        <div style="display:flex;gap:8px;"><span style="color:#4ade80;flex-shrink:0;">✓</span><span style="font-size:.9rem;color:#c8dae6;">Embed on any site · Unlimited tips · 1 year</span></div>
+      </div>
+      <div style="margin-top:10px;text-align:center;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:.74rem;color:#22d3ee;">Or hold 2,500 $TCM for free permanent access → <a href="https://tipcryp.io/invest.html" style="color:#4ade80;text-decoration:none;font-weight:700;">Buy $TCM</a></p>
+      </div>
+    </div>
+
+    <!-- THE WIDGET — identical to tipcryp.me -->
+    <div id="widget-panel">
+
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+        <div>
+          <p style="font-family:'Urbanist',sans-serif;font-size:1rem;font-weight:700;color:#fff;">Pay for Creator Pass</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#94a3b8;margin-top:2px;">Send <span style="color:#22d3ee;font-weight:700;">$100 USD</span> equivalent of your chosen token</p>
+        </div>
+        <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.2);border-radius:999px;padding:4px 12px;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#22d3ee;font-weight:700;"><span class="w-pulse-dot"></span>SECURE</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px;">
+
+        <div>
+          <span class="w-field-label">&#9312; Choose Your Wallet</span>
+          <div class="w-wallet-grid">
+
+            <button class="w-wallet-btn" id="btn-metamask" onclick="wConnectWallet('metamask')">
+              <svg viewBox="0 0 35 33" xmlns="http://www.w3.org/2000/svg">
+                <polygon fill="#e2761b" stroke="#e2761b" stroke-linecap="round" stroke-linejoin="round" points="32.958,0.5 19.184,10.178 21.681,4.136"/>
+                <polygon fill="#e4761b" stroke="#e4761b" stroke-linecap="round" stroke-linejoin="round" points="2.042,0.5 15.704,10.274 13.319,4.136"/>
+                <polygon fill="#e4761b" stroke="#e4761b" stroke-linecap="round" stroke-linejoin="round" points="27.893,23.61 24.178,29.291 32.186,31.483 34.467,23.736"/>
+                <polygon fill="#e4761b" stroke="#e4761b" stroke-linecap="round" stroke-linejoin="round" points="0.533,23.736 2.814,31.483 10.822,29.291 7.107,23.61"/>
+                <polygon fill="#e4761b" stroke="#e4761b" stroke-linecap="round" stroke-linejoin="round" points="24.178,29.291 19.184,10.178 15.845,9.807"/>
+                <polygon fill="#e4761b" stroke="#e4761b" stroke-linecap="round" stroke-linejoin="round" points="10.822,29.291 15.845,9.807 19.184,10.178"/>
+                <polygon fill="#d7c1b3" stroke="#d7c1b3" stroke-linecap="round" stroke-linejoin="round" points="10.822,29.291 15.641,26.968 11.448,23.791"/>
+                <polygon fill="#d7c1b3" stroke="#d7c1b3" stroke-linecap="round" stroke-linejoin="round" points="19.359,26.968 24.178,29.291 23.552,23.791"/>
+                <polygon fill="#233447" stroke="#233447" stroke-linecap="round" stroke-linejoin="round" points="24.178,29.291 19.359,26.968 19.745,30.111"/>
+                <polygon fill="#233447" stroke="#233447" stroke-linecap="round" stroke-linejoin="round" points="10.822,29.291 15.255,30.111 15.641,26.968"/>
+                <polygon fill="#f6851b" stroke="#f6851b" stroke-linecap="round" stroke-linejoin="round" points="22.753,22.977 19.745,30.111 24.178,29.291"/>
+                <polygon fill="#f6851b" stroke="#f6851b" stroke-linecap="round" stroke-linejoin="round" points="12.247,22.977 15.255,30.111 18.546,22.591"/>
+              </svg>
+              <span class="w-wallet-btn-name">MetaMask</span>
+              <span class="w-status-dot"></span>
+            </button>
+
+            <button class="w-wallet-btn" id="btn-coinbase" onclick="wConnectWallet('coinbase')">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="4" width="92" height="92" rx="20" fill="#1652f0"/>
+                <rect x="22" y="22" width="56" height="56" rx="10" fill="#fff"/>
+                <rect x="36" y="42" width="28" height="16" rx="5" fill="#1652f0"/>
+              </svg>
+              <span class="w-wallet-btn-name">Coinbase</span>
+              <span class="w-status-dot"></span>
+            </button>
+
+            <button class="w-wallet-btn" id="btn-rabby" onclick="wConnectWallet('rabby')">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="4" width="92" height="92" rx="20" fill="#8583FF"/>
+                <ellipse cx="50" cy="58" rx="27" ry="19" fill="#fff"/>
+                <ellipse cx="50" cy="36" rx="20" ry="16" fill="#fff"/>
+                <circle cx="40" cy="38" r="5" fill="#8583FF"/>
+                <circle cx="60" cy="38" r="5" fill="#8583FF"/>
+                <circle cx="40" cy="38" r="2.5" fill="#fff"/>
+                <circle cx="60" cy="38" r="2.5" fill="#fff"/>
+              </svg>
+              <span class="w-wallet-btn-name">Rabby</span>
+              <span class="w-status-dot"></span>
+            </button>
+
+            <button class="w-wallet-btn" id="btn-exodus" onclick="wConnectWallet('exodus')">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="4" width="92" height="92" rx="20" fill="#0D0D1A"/>
+                <polygon points="50,12 88,75 12,75" fill="none" stroke="#00D4AA" stroke-width="6" stroke-linejoin="round"/>
+                <polygon points="50,28 76,72 24,72" fill="#00D4AA" opacity="0.18"/>
+                <circle cx="50" cy="52" r="11" fill="#00D4AA"/>
+                <circle cx="50" cy="52" r="5" fill="#0D0D1A"/>
+              </svg>
+              <span class="w-wallet-btn-name">Exodus</span>
+              <span class="w-status-dot"></span>
+            </button>
+
+          </div>
+          <div class="w-connected-bar" id="w-connectedBar">
+            <div class="w-pulse-dot"></div>
+            <span class="w-wallet-label" id="w-connectedWalletName"></span>
+            <span class="w-addr-text" id="w-connectedAddr"></span>
+            <button class="w-disconnect-btn" onclick="wDisconnectWallet()">Disconnect</button>
+          </div>
+        </div>
+
+        <button class="w-send-btn" id="w-connectBtn" onclick="wHandleSend()" style="background:#1a2a2a;color:#22d3ee;border:1px solid #22d3ee33;box-shadow:none;">
+          &#10230; Connect Wallet First
+        </button>
+
+        <hr class="w-divider"/>
+
+        <div>
+          <label class="w-field-label" for="w-tokenSelect">&#9313; Select Token</label>
+          <div class="w-select-wrap">
+            <select id="w-tokenSelect" class="w-select" onchange="wOnTokenChange()">
+              <option value="" disabled selected>— Choose Token —</option>
+              <option value="BTC">BTC — Bitcoin (Exodus only)</option>
+              <option value="ETH">ETH — Ethereum</option>
+              <option value="USDT">USDT — Tether (ERC-20)</option>
+              <option value="XRP">XRP — XRP Ledger (Exodus only)</option>
+            </select>
+          </div>
+        </div>
+
+        <hr class="w-divider"/>
+
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;flex-wrap:wrap;gap:4px;">
+            <span class="w-field-label" style="margin:0;">&#9314; TipCryp Payment Address</span>
+            <span id="w-addr-copy-btn" onclick="wCopyAddr()" style="display:none;font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#22d3ee;cursor:pointer;padding:3px 8px;border:1px solid rgba(34,211,238,.2);border-radius:5px;background:rgba(34,211,238,.06);transition:background .2s;">⧉ Copy</span>
+          </div>
+          <!-- Hidden select keeps the JS logic working unchanged -->
+          <select id="w-walletSelect" style="display:none;"></select>
+          <!-- Transparent address display — auto-fills when token selected -->
+          <div id="w-addressDisplay" style="background:#050505;border:1px solid #1e1e1e;border-radius:8px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:#334155;word-break:break-all;line-height:1.7;min-height:48px;transition:border-color .3s,color .3s;position:relative;">
+            <span id="w-addr-placeholder" style="color:#334155;">Select a token above — payment address appears here</span>
+            <span id="w-addr-text" style="display:none;color:#4ade80;"></span>
+          </div>
+          <div id="w-addr-meta" style="display:none;margin-top:6px;align-items:center;gap:6px;">
+            <span style="width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 5px #4ade80;flex-shrink:0;"></span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#4ade80;" id="w-addr-network">TipCryp Official Wallet</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#334155;margin-left:auto;" id="w-addr-verify-link"></span>
+          </div>
+        </div>
+
+        <div>
+          <label class="w-field-label" for="w-amountInput">&#9315; Amount — Locked at $100 USD</label>
+          <div class="w-amount-wrap">
+            <input type="number" id="w-amountInput" placeholder="Select token above" readonly/>
+            <span class="w-amount-unit" id="w-amountUnit">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:6px;flex-wrap:wrap;gap:4px;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:#22d3ee;font-weight:600;">&#8776; $100.00 USD</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:#607888;" id="w-feeLabel">&#9981; Network fee varies</span>
+          </div>
+        </div>
+
+        <button class="w-send-btn" id="w-sendBtn" onclick="wHandleSend()">
+          &#10230; PAY $100 — GET API KEY
+        </button>
+        <div style="text-align:center;margin-top:8px;">
+          <button onclick="wSkipPayment()" style="background:none;border:none;color:#334155;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.65rem;text-decoration:underline;padding:4px;">Skip payment — test confirmation page</button>
+        </div>
+
+        <div class="w-tx-result" id="w-txResult">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+            <span style="color:#4ade80;font-size:1.3rem;">&#10003;</span>
+            <span style="font-family:'Urbanist',sans-serif;font-size:1rem;font-weight:700;color:#fff;">Payment Submitted!</span>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:.8rem;color:#94a3b8;display:flex;flex-direction:column;gap:5px;">
+            <div>Token: <span id="w-txToken" style="color:#e2e8f0;"></span></div>
+            <div>Amount: <span id="w-txAmount" style="color:#e2e8f0;"></span></div>
+            <div>TX: <a id="w-txHashLink" href="#" target="_blank" rel="noopener noreferrer" style="color:#22d3ee;word-break:break-all;"></a></div>
+          </div>
+          <div style="margin-top:12px;padding:10px 14px;background:rgba(34,211,238,.05);border:1px solid rgba(34,211,238,.15);border-radius:8px;">
+            <p style="font-family:'JetBrains Mono',monospace;font-size:.76rem;color:#22d3ee;font-weight:700;margin-bottom:4px;">Next Step</p>
+            <p style="font-size:.9rem;color:#b0c0cc;line-height:1.65;">Email your TX hash to <a href="mailto:billing@tipcryp.io" style="color:#22d3ee;">billing@tipcryp.io</a> with your creator name — API key issued within 24h.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+</main>
+
+
+<!-- ══════════════════════════════════════════════════════
+     CONFIRMATION PAGE — shown after successful payment
+     Covers the whole viewport, replaces the main layout
+════════════════════════════════════════════════════════ -->
+<div id="confirm-page" style="display:none;min-height:100vh;background:var(--bg);padding:0 0 80px;">
+
+  <!-- Confirm page nav -->
+  <div style="background:rgba(8,11,16,.96);border-bottom:1px solid rgba(255,255,255,.05);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;backdrop-filter:blur(20px);">
+    <a href="index.html" style="font-family:'Urbanist',sans-serif;font-size:1.75rem;font-weight:900;color:#fff;text-decoration:none;letter-spacing:-.03em;">tip<span style="color:#22d3ee;">cryp</span><span style="color:#fff;font-size:1rem;font-weight:500;">.me</span></a>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2);border-radius:999px;padding:4px 12px;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#4ade80;font-weight:700;"><span style="width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 5px #4ade80;display:inline-block;"></span>Access Granted</span>
+      <button onclick="showDashboard()" style="background:#22d3ee;color:#000;font-family:'Urbanist',sans-serif;font-weight:700;font-size:.78rem;border:none;border-radius:8px;padding:8px 18px;cursor:pointer;">Open Dashboard →</button>
+    </div>
+  </div>
+
+  <div style="max-width:680px;margin:0 auto;padding:40px 24px;">
+
+    <!-- Success header -->
+    <div style="text-align:center;margin-bottom:40px;">
+      <div style="width:72px;height:72px;border-radius:50%;background:rgba(74,222,128,.12);border:2px solid rgba(74,222,128,.35);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:2rem;">✓</div>
+      <h1 style="font-family:'Urbanist',sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:8px;">You're all set!</h1>
+      <p style="font-size:.95rem;color:#64748b;line-height:1.75;">Your TipCryp Creator Pass is confirmed. API key generated and sent to your email.</p>
+    </div>
+
+    <!-- API Key box -->
+    <div style="background:linear-gradient(135deg,rgba(17,22,32,.98),rgba(13,17,23,.98));border:1px solid rgba(34,211,238,.25);border-radius:16px;padding:28px;margin-bottom:20px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#22d3ee,transparent);"></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:#22d3ee;font-weight:700;">Your API Key</p>
+        <button onclick="cpConfirmKey()" style="display:inline-flex;align-items:center;gap:6px;background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.2);border-radius:7px;color:#22d3ee;font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:6px 14px;cursor:pointer;transition:background .2s;" id="copy-key-btn">⧉ Copy Key</button>
+      </div>
+      <div id="confirm-key-display" onclick="cpConfirmKey()" style="background:rgba(0,0,0,.5);border:1px solid rgba(34,211,238,.15);border-radius:10px;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:.85rem;color:#67e8f9;word-break:break-all;letter-spacing:.03em;cursor:pointer;line-height:1.8;transition:border-color .2s;">—</div>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#475569;margin-top:8px;">⚠ Store this securely. Do not commit to public code or share publicly.</p>
+    </div>
+
+    <!-- Registration + TX summary -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+      <div style="background:rgba(13,17,23,.95);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:18px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#334155;margin-bottom:12px;">Account</p>
+        <div style="display:flex;flex-direction:column;gap:7px;">
+          <div><p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#475569;">Creator</p><p style="font-size:.9rem;color:#fff;font-weight:600;" id="confirm-name">—</p></div>
+          <div><p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#475569;">Email</p><p style="font-size:.82rem;color:#94a3b8;" id="confirm-email">—</p></div>
+          <div><p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#475569;">Plan</p><p style="font-size:.82rem;color:#22d3ee;font-weight:600;" id="confirm-plan">Creator Pass · 1 Year</p></div>
+        </div>
+      </div>
+      <div style="background:rgba(13,17,23,.95);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:18px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#334155;margin-bottom:12px;">Payment</p>
+        <div style="display:flex;flex-direction:column;gap:7px;">
+          <div><p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#475569;">Amount</p><p style="font-size:.9rem;color:#4ade80;font-weight:700;" id="confirm-amount">$100 USD</p></div>
+          <div><p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#475569;">Token</p><p style="font-size:.82rem;color:#94a3b8;" id="confirm-token">—</p></div>
+          <div><p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#475569;">TX Hash</p><a id="confirm-tx-link" href="#" target="_blank" rel="noopener noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#22d3ee;word-break:break-all;">View on Explorer →</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Next steps -->
+    <div style="background:rgba(13,17,23,.95);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:24px;margin-bottom:20px;">
+      <p style="font-family:'Urbanist',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:18px;">Next Steps</p>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:32px;height:32px;border-radius:50%;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.25);color:#22d3ee;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
+          <div><p style="font-size:.92rem;color:#e2e8f0;font-weight:600;margin-bottom:2px;">Copy your API key above</p><p style="font-size:.82rem;color:#64748b;line-height:1.65;">Store it in a safe place. You'll need it to activate the widget on your site.</p></div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:32px;height:32px;border-radius:50%;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.25);color:#22d3ee;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+          <div><p style="font-size:.92rem;color:#e2e8f0;font-weight:600;margin-bottom:2px;">Embed the widget on your site</p><p style="font-size:.82rem;color:#64748b;line-height:1.65;">Paste one script tag before <code style="color:#22d3ee;background:rgba(34,211,238,.08);padding:1px 5px;border-radius:4px;">&lt;/body&gt;</code> on any page. Done in 2 minutes.</p></div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:32px;height:32px;border-radius:50%;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.25);color:#22d3ee;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
+          <div><p style="font-size:.92rem;color:#e2e8f0;font-weight:600;margin-bottom:2px;">Generate your stream QR code</p><p style="font-size:.82rem;color:#64748b;line-height:1.65;">Add it to your OBS/Streamlabs overlay and start receiving direct crypto tips live.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Embed code preview -->
+    <div style="background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:20px;margin-bottom:20px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:#475569;">Your Embed Code</p>
+        <button onclick="cpCopyEmbed()" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:7px;color:#94a3b8;font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:5px 12px;cursor:pointer;">⧉ Copy</button>
+      </div>
+      <pre id="confirm-embed-code" style="font-family:'JetBrains Mono',monospace;font-size:.76rem;color:#67e8f9;line-height:1.8;overflow-x:auto;white-space:pre-wrap;margin:0;"></pre>
+    </div>
+
+    <!-- Action buttons -->
+    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
+      <button onclick="showDashboard()" style="background:#22d3ee;color:#000;font-family:'Urbanist',sans-serif;font-weight:800;font-size:.88rem;letter-spacing:.06em;text-transform:uppercase;border:none;border-radius:10px;padding:14px 28px;cursor:pointer;box-shadow:0 0 24px rgba(34,211,238,.3);">Open Dashboard →</button>
+      <a href="https://t.me/+WtbDPLuRTLE4NTQx" target="_blank" rel="noopener noreferrer" style="background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25);color:#4ade80;font-family:'Urbanist',sans-serif;font-weight:700;font-size:.88rem;border-radius:10px;padding:14px 28px;text-decoration:none;">Join Telegram Community</a>
+      <a href="https://tipcryp.me" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#94a3b8;font-family:'Urbanist',sans-serif;font-weight:600;font-size:.88rem;border-radius:10px;padding:14px 28px;text-decoration:none;">← Back to TipCryp.me</a>
+    </div>
+
+  </div>
+  </div>
+</div>
+
+<!-- ════ DASHBOARD (hidden until key generated) ════ -->
+<div id="dashboard-section" style="display:none;max-width:1280px;margin:0 auto;padding:0 24px 80px;">
+  <div style="margin-bottom:28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+    <div>
+      <h2 style="font-family:'Urbanist',sans-serif;font-size:1.8rem;font-weight:800;color:#fff;">Creator Dashboard</h2>
+      <p style="font-size:.88rem;color:#475569;margin-top:4px;">Welcome, <strong id="dash-name" style="color:#94a3b8;"></strong>. Your API key is active.</p>
+    </div>
+    <span id="dash-plan-badge" style="font-family:'JetBrains Mono',monospace;font-size:.68rem;padding:4px 14px;border-radius:999px;"></span>
+  </div>
+
+  <!-- Stats -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:24px;">
+    <div class="panel" style="padding:18px;"><p style="font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#334155;text-transform:uppercase;margin-bottom:5px;">Status</p><p style="font-family:'Urbanist',sans-serif;font-size:1.3rem;font-weight:800;color:var(--green);">Active</p><p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#334155;margin-top:3px;">365 days remaining</p></div>
+    <div class="panel" style="padding:18px;"><p style="font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#334155;text-transform:uppercase;margin-bottom:5px;">Total Tips</p><p style="font-family:'Urbanist',sans-serif;font-size:1.3rem;font-weight:800;color:#fff;">0</p><p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#334155;margin-top:3px;">Since activation</p></div>
+    <div class="panel" style="padding:18px;"><p style="font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#334155;text-transform:uppercase;margin-bottom:5px;">Widget Loads</p><p style="font-family:'Urbanist',sans-serif;font-size:1.3rem;font-weight:800;color:#fff;">0</p><p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#334155;margin-top:3px;">All-time</p></div>
+    <div class="panel" style="padding:18px;"><p style="font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#334155;text-transform:uppercase;margin-bottom:5px;">Your Plan</p><p id="dash-plan-display" style="font-family:'Urbanist',sans-serif;font-size:1.1rem;font-weight:800;color:var(--cyan);">Creator Pass</p><p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#334155;margin-top:3px;">Annual License</p></div>
+  </div>
+
+  <!-- Tabs -->
+  <div style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;">
+    <button class="tab-btn active" onclick="switchTab('embed',this)">Embed Code</button>
+    <button class="tab-btn" onclick="switchTab('qrstream',this)">QR for Streams</button>
+    <button class="tab-btn" onclick="switchTab('config',this)">Widget Config</button>
+    <button class="tab-btn" onclick="switchTab('key',this)">API Key</button>
+    <button class="tab-btn" onclick="switchTab('docs',this)">Documentation</button>
+  </div>
+
+  <!-- EMBED TAB -->
+  <div id="tab-embed" class="tab-panel active">
+    <div class="panel" style="padding:26px;">
+      <h3 style="font-family:'Urbanist',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:6px;">Embed on Your Website</h3>
+      <p style="font-size:.84rem;color:#64748b;margin-bottom:18px;">Paste this single script tag anywhere in your HTML where you want the widget to appear.</p>
+      <div class="code-block" id="embed-code">
+        <span class="cm">&lt;!-- TipCryp Widget — tipcryp.me --&gt;</span><br/>
+        <span class="kw">&lt;script</span> <span class="str">src</span>=<span class="str">"https://tipcryp.me/widget.js"</span><br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">data-key</span>=<span class="str" id="embed-key-span">"tcm_•••••••••••••••"</span><br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">data-creator</span>=<span class="str" id="embed-name-span">"your-name"</span><br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">data-theme</span>=<span class="str">"dark"</span><br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">data-position</span>=<span class="str">"right"</span><br/>
+        <span class="kw">&gt;&lt;/script&gt;</span>
+      </div>
+      <button onclick="copyEmbed()" class="btn-ghost" style="margin-top:12px;">⧉ Copy Embed Code</button>
+      <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div style="padding:14px;background:rgba(74,222,128,.05);border:1px solid rgba(74,222,128,.12);border-radius:10px;">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--green);margin-bottom:4px;">✓ WordPress</p>
+          <p style="font-size:.78rem;color:#64748b;">Paste in any Text/HTML block or footer.php before &lt;/body&gt;</p>
+        </div>
+        <div style="padding:14px;background:rgba(34,211,238,.04);border:1px solid rgba(34,211,238,.1);border-radius:10px;">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--cyan);margin-bottom:4px;">✓ Linktree / Beacons</p>
+          <p style="font-size:.78rem;color:#64748b;">Use the Custom HTML embed block and paste the script tag.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QR STREAMS TAB -->
+  <div id="tab-qrstream" class="tab-panel">
+    <div class="panel" style="padding:26px;">
+      <h3 style="font-family:'Urbanist',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:6px;">QR Codes for Live Streams</h3>
+      <p style="font-size:.84rem;color:#64748b;margin-bottom:22px;line-height:1.75;">Generate a QR code for any of your wallet addresses. Add it as a Browser Source in OBS or Streamlabs — viewers scan it directly and crypto goes straight to your wallet. No middleman, zero platform fees.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;">
+        <div>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div>
+              <label class="field-label">Select Token</label>
+              <div class="select-wrap">
+                <select id="qr-token-select" class="field-select" onchange="generateStreamQR()">
+                  <option value="" disabled selected>— Choose token —</option>
+                  <option value="ETH">ETH — Ethereum</option>
+                  <option value="BTC">BTC — Bitcoin</option>
+                  <option value="USDT">USDT — Tether</option>
+                  <option value="SOL">SOL — Solana</option>
+                  <option value="XRP">XRP — Ripple</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label class="field-label">Your Wallet Address</label>
+              <input type="text" id="qr-addr-input" class="field-input" placeholder="Paste your wallet address here" oninput="generateStreamQR()"/>
+              <p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#334155;margin-top:5px;">This address is encoded into the QR — tips go directly here.</p>
+            </div>
+            <div>
+              <label class="field-label">QR Size</label>
+              <div class="select-wrap">
+                <select id="qr-size-select" class="field-select" onchange="generateStreamQR()">
+                  <option value="200">Small (200×200)</option>
+                  <option value="256" selected>Medium (256×256)</option>
+                  <option value="320">Large (320×320)</option>
+                  <option value="400">XL (400×400)</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn-ghost" onclick="downloadStreamQR()">⬇ Download QR PNG</button>
+          </div>
+        </div>
+        <div style="text-align:center;">
+          <div id="stream-qr-container" style="display:inline-flex;align-items:center;justify-content:center;background:#fff;border-radius:16px;padding:16px;min-width:180px;min-height:180px;">
+            <p style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#94a3b8;">Enter address to<br/>generate QR</p>
+          </div>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#475569;margin-top:10px;" id="stream-qr-label">—</p>
+        </div>
+      </div>
+
+      <div style="margin-top:22px;padding:18px;background:rgba(34,211,238,.04);border:1px solid rgba(34,211,238,.12);border-radius:12px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--cyan);margin-bottom:10px;font-weight:700;">OBS / Streamlabs Setup (2 minutes)</p>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#22d3ee;flex-shrink:0;width:18px;">1.</span><span style="font-size:.82rem;color:#64748b;">Download your QR PNG above</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#22d3ee;flex-shrink:0;width:18px;">2.</span><span style="font-size:.82rem;color:#64748b;">In OBS: Add Source → Image → select your QR file</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#22d3ee;flex-shrink:0;width:18px;">3.</span><span style="font-size:.82rem;color:#64748b;">Position in the corner of your scene — resize to fit your layout</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#22d3ee;flex-shrink:0;width:18px;">4.</span><span style="font-size:.82rem;color:#64748b;">Viewers scan with any mobile wallet app and tips arrive directly</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONFIG TAB -->
+  <div id="tab-config" class="tab-panel">
+    <div class="panel" style="padding:26px;">
+      <h3 style="font-family:'Urbanist',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:6px;">Widget Configuration</h3>
+      <p style="font-size:.84rem;color:#64748b;margin-bottom:20px;">Set your wallet addresses. Tips go directly to these — TipCryp never holds or routes your funds.</p>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div>
+          <label class="field-label">ETH / ERC-20 Wallet (receives ETH + USDT)</label>
+          <input type="text" class="field-input" placeholder="0x..." id="cfg-eth"/>
+        </div>
+        <div>
+          <label class="field-label">Bitcoin Address</label>
+          <input type="text" class="field-input" placeholder="bc1q..." id="cfg-btc"/>
+        </div>
+        <div>
+          <label class="field-label">Solana Address</label>
+          <input type="text" class="field-input" placeholder="Sol address..." id="cfg-sol"/>
+        </div>
+        <div>
+          <label class="field-label">XRP Address</label>
+          <input type="text" class="field-input" placeholder="r..." id="cfg-xrp"/>
+        </div>
+        <div>
+          <label class="field-label">Widget Theme</label>
+          <div class="select-wrap">
+            <select class="field-select" id="cfg-theme">
+              <option value="dark" selected>Dark (default)</option>
+              <option value="cyber">Cyber (cyan accent)</option>
+              <option value="light">Light</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="saveConfig()">Save Configuration</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY TAB -->
+  <div id="tab-key" class="tab-panel">
+    <div class="panel" style="padding:26px;">
+      <h3 style="font-family:'Urbanist',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:6px;">Your API Key</h3>
+      <p style="font-size:.84rem;color:#64748b;margin-bottom:16px;">Keep this private. Treat it like a password.</p>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <span class="field-label" style="margin:0;">Active API Key</span>
+        <button onclick="copyKey()" class="btn-ghost">⧉ Copy</button>
+      </div>
+      <div class="api-key-box" id="dash-key-display" onclick="copyKey()"></div>
+      <div style="margin-top:14px;">
+        <button onclick="regenerateKey()" style="background:none;border:1px solid rgba(248,113,113,.2);border-radius:8px;color:var(--red);font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:9px 16px;cursor:pointer;">⟳ Regenerate Key</button>
+      </div>
+      <div style="margin-top:14px;padding:12px;background:rgba(248,113,113,.04);border:1px solid rgba(248,113,113,.1);border-radius:10px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--red);margin-bottom:3px;">⚠ Security Notice</p>
+        <p style="font-size:.78rem;color:#64748b;">Regenerating invalidates the old key immediately. Update your embed code afterwards.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOCS TAB -->
+  <div id="tab-docs" class="tab-panel">
+    <div class="panel" style="padding:26px;">
+      <h3 style="font-family:'Urbanist',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:18px;">Quick Integration Guide</h3>
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        <div>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--cyan);margin-bottom:8px;">STEP 1 — Add the script</p>
+          <div class="code-block">
+            <span class="cm">&lt;!-- Add before &lt;/body&gt; --&gt;</span><br/>
+            <span class="kw">&lt;script</span> <span class="str">src</span>=<span class="str">"https://tipcryp.me/widget.js"</span> <span class="str">data-key</span>=<span class="str">"YOUR_KEY"</span><span class="kw">&gt;&lt;/script&gt;</span>
+          </div>
+        </div>
+        <div>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--cyan);margin-bottom:8px;">STEP 2 — Open programmatically</p>
+          <div class="code-block">
+            <span class="cm">// Trigger widget from a button</span><br/>
+            <span class="kw">document</span>.getElementById(<span class="str">'tip-btn'</span>)<br/>
+            &nbsp;&nbsp;.addEventListener(<span class="str">'click'</span>, () =&gt; {<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">window</span>.TipCryp.open();<br/>
+            &nbsp;&nbsp;});
+          </div>
+        </div>
+        <div>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--cyan);margin-bottom:8px;">STEP 3 — Available data attributes</p>
+          <div class="code-block">
+            <span class="str">data-key</span>=<span class="str">"tcm_..."</span>        <span class="cm">// Required</span><br/>
+            <span class="str">data-creator</span>=<span class="str">"name"</span>     <span class="cm">// Display name</span><br/>
+            <span class="str">data-theme</span>=<span class="str">"dark|light"</span> <span class="cm">// Colour theme</span><br/>
+            <span class="str">data-position</span>=<span class="str">"right"</span>  <span class="cm">// right | left | inline</span><br/>
+            <span class="str">data-currency</span>=<span class="str">"ETH"</span>   <span class="cm">// Default token</span>
+          </div>
+        </div>
+        <div style="padding:16px;background:rgba(74,222,128,.04);border:1px solid rgba(74,222,128,.1);border-radius:10px;">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--green);margin-bottom:6px;">Support</p>
+          <p style="font-size:.84rem;color:#64748b;line-height:1.75;">Need help? Join the <a href="https://t.me/+WtbDPLuRTLE4NTQx" target="_blank" rel="noopener noreferrer" style="color:var(--green);text-decoration:none;">TipCryp Telegram community</a> for real-time support.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<footer style="border-top:1px solid rgba(255,255,255,.05);background:#060810;padding:20px 24px;text-align:center;">
+  <p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#1e293b;">
+    © 2026 TipCryp · tipcryp.me · <a href="https://tipcryp.io" style="color:#334155;text-decoration:none;">$TCM ICO</a> · <a href="https://t.me/+WtbDPLuRTLE4NTQx" target="_blank" rel="noopener noreferrer" style="color:#4ade80;text-decoration:none;">Telegram</a>
+  </p>
+</footer>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+
+<script>
+    // ══ WALLET ADDRESSES ══
+    const wWalletAddresses={"BTCaddy":"bc1qly7tdcwwha483j09v4yc4mylc529sj9utsrphv","ETHaddy":"0x83DDa88d5B75A1A790EB99335c1A166Bfc783877","USDTaddy":"0x83DDa88d5B75A1A790EB99335c1A166Bfc783877","XRPaddy":"rLHzPsX6oXkzU2qL12kHCH8G8cnZv1rBJh"};
+    const W_TOKEN_ADDR_MAP = {ETH:'ETHaddy', USDT:'USDTaddy', BTC:'BTCaddy', XRP:'XRPaddy'};
+    const W_USDT_CONTRACT="0xdAC17F958D2ee523a2206206994597C13D831ec7";
+    const W_TOKEN_PRICES={ETH:3200,BTC:95000,USDT:1,XRP:0.55};
+    const W_API_KEY_USD=100;
+    let wConnectedAccount=null,wConnectedProvider=null,wWeb3Provider=null,wToastTimer=null;
+    let regData={name:'',email:'',platform:'',plan:'pay',step:1};
+    let paymentData={token:'',amount:0,txHash:'',confirmed:false};
+    let finalApiKey='';
+
+    function wFetchPrices(){fetch('https://api.coinlore.net/api/tickers/?ids=80,90,518,58',{signal:AbortSignal.timeout(6000)}).then(r=>r.json()).then(d=>{if(d&&d.data)d.data.forEach(t=>{if(t.symbol==='ETH')W_TOKEN_PRICES.ETH=parseFloat(t.price_usd);if(t.symbol==='BTC')W_TOKEN_PRICES.BTC=parseFloat(t.price_usd);if(t.symbol==='XRP')W_TOKEN_PRICES.XRP=parseFloat(t.price_usd);});wRefreshAmount();}).catch(()=>{});}
+
+    function wRefreshAmount(){const token=document.getElementById('w-tokenSelect').value;if(!token)return;const price=W_TOKEN_PRICES[token]||1;const dp=token==='BTC'?7:token==='USDT'?2:5;const amt=parseFloat((W_API_KEY_USD/price).toFixed(dp));document.getElementById('w-amountInput').value=amt;document.getElementById('w-amountUnit').textContent=token;const fees={ETH:'⛽ ~$1–3 gas',USDT:'⛽ ~$2–5 ERC-20 gas',BTC:'⛽ ~$0.50–2 fee',XRP:'⛽ ~$0.001 fee'};document.getElementById('w-feeLabel').textContent=fees[token]||'⛽ Network fee varies';}
+
+    function wShowToast(msg,type,ms){type=type||'info';ms=ms||4500;const t=document.getElementById('toast');t.textContent=msg;t.className='show '+type;clearTimeout(wToastTimer);wToastTimer=setTimeout(()=>{t.className='';},ms);}
+
+    function wOpenModal(title,bodyHTML,note){document.getElementById('w-modalTitle').textContent=title;document.getElementById('w-modalBody').innerHTML=bodyHTML;document.getElementById('w-modalNote').textContent=note||'';document.getElementById('w-walletModal').classList.add('show');}
+    function wCloseModal(){const m=document.getElementById('w-walletModal');if(m)m.classList.remove('show');}
+
+    function wShowAddress(){
+        const token = document.getElementById('w-tokenSelect').value;
+        const key   = W_TOKEN_ADDR_MAP[token];
+        const addr  = key ? wWalletAddresses[key] : null;
+        const box   = document.getElementById('w-addressDisplay');
+        const ph    = document.getElementById('w-addr-placeholder');
+        const txt   = document.getElementById('w-addr-text');
+        const meta  = document.getElementById('w-addr-meta');
+        const copy  = document.getElementById('w-addr-copy-btn');
+        const net   = document.getElementById('w-addr-network');
+        const ver   = document.getElementById('w-addr-verify-link');
+        const nets  = { ETH:'Ethereum Mainnet', USDT:'Ethereum Mainnet (ERC-20)', BTC:'Bitcoin Mainnet', XRP:'XRP Ledger' };
+        const expls = { ETH:'https://etherscan.io/address/0x83DDa88d5B75A1A790EB99335c1A166Bfc783877', USDT:'https://etherscan.io/address/0x83DDa88d5B75A1A790EB99335c1A166Bfc783877', BTC:'https://mempool.space/address/bc1qly7tdcwwha483j09v4yc4mylc529sj9utsrphv', XRP:'https://xrpscan.com/account/rLHzPsX6oXkzU2qL12kHCH8G8cnZv1rBJh' };
+        if(addr){
+            if(ph)   ph.style.display  = 'none';
+            if(txt){ txt.style.display = 'inline'; txt.textContent = addr; }
+            if(box)  box.style.borderColor = 'rgba(74,222,128,.35)';
+            if(meta) meta.style.display = 'flex';
+            if(copy) copy.style.display = 'inline';
+            if(net)  net.textContent = (nets[token]||'TipCryp Official Wallet') + ' · TipCryp Official';
+            if(ver)  ver.innerHTML = '<a href="'+(expls[token]||'#')+'" target="_blank" rel="noopener noreferrer" style="color:#475569;text-decoration:none;font-size:.62rem;">Verify on explorer ↗</a>';
+        } else {
+            if(ph)   ph.style.display  = 'inline';
+            if(txt)  txt.style.display = 'none';
+            if(box)  box.style.borderColor = '#1e1e1e';
+            if(meta) meta.style.display = 'none';
+            if(copy) copy.style.display = 'none';
+        }
+    }
+    function wCopyAddr(){
+        const addr = document.getElementById('w-addr-text').textContent;
+        if(!addr) return;
+        navigator.clipboard.writeText(addr).then(()=>{
+            const btn = document.getElementById('w-addr-copy-btn');
+            const orig = btn.textContent; btn.textContent = '✓ Copied!'; btn.style.color='#4ade80';
+            setTimeout(()=>{ btn.textContent=orig; btn.style.color='#22d3ee'; }, 2000);
+        });
+    }
+
+    function wOnTokenChange(){
+        const token = document.getElementById('w-tokenSelect').value;
+        document.getElementById('w-amountUnit').textContent = token||'—';
+        wShowAddress();
+        wRefreshAmount();
+    }
+
+    function wSetConnected(account,walletName){
+        wConnectedAccount=account;
+        const isExodus=(account==='exodus-app');
+        const short=isExodus?'Exodus App':(account?account.slice(0,6)+'…'+account.slice(-4):'');
+        document.getElementById('w-connectedWalletName').textContent=walletName?walletName+' •':'';
+        document.getElementById('w-connectedAddr').textContent=short;
+        const bar=document.getElementById('w-connectedBar');
+        const sendBtn=document.getElementById('w-sendBtn');
+        const connectBtn=document.getElementById('w-connectBtn');
+        if(account){
+            bar.classList.add('show');
+            if(regData.step>=2){sendBtn.textContent='⟶ PAY $100 — GET API KEY';sendBtn.style.cssText='';}
+            else{sendBtn.textContent='⟶ Complete Registration First →';sendBtn.style.cssText='background:#1a2a2a;color:#666;border:1px solid #2a3a3a;box-shadow:none;cursor:not-allowed;';}
+            connectBtn.style.display='none';
+        }else{
+            bar.classList.remove('show');
+            sendBtn.textContent='⟶ PAY $100 — GET API KEY';sendBtn.style.cssText='';
+            connectBtn.style.display='block';
+            connectBtn.style.cssText='background:#1a2a2a;color:#22d3ee;border:1px solid #22d3ee33;box-shadow:none;';
+        }
+    }
+
+    function wMarkBtn(id){['metamask','coinbase','rabby','exodus'].forEach(w=>{const b=document.getElementById('btn-'+w);if(b)b.classList.remove('connected');});if(id){const a=document.getElementById('btn-'+id);if(a)a.classList.add('connected');}}
+
+    // ── Provider detection with improved Rabby support ──
+    function wGetEthProvider(type){
+        const eth=window.ethereum;
+        if(!eth) return null;
+        if(eth.providers&&eth.providers.length){
+            if(type==='metamask') return eth.providers.find(p=>p.isMetaMask&&!p.isCoinbaseWallet)||null;
+            if(type==='coinbase') return eth.providers.find(p=>p.isCoinbaseWallet)||null;
+            if(type==='rabby')    return eth.providers.find(p=>p.isRabby)||eth.providers.find(p=>!p.isMetaMask&&!p.isCoinbaseWallet)||null;
+            return null;
+        }
+        if(type==='metamask'&&eth.isMetaMask&&!eth.isCoinbaseWallet) return eth;
+        if(type==='coinbase'&&eth.isCoinbaseWallet) return eth;
+        if(type==='rabby') return (eth.isRabby||(eth.isMetaMask===undefined&&!eth.isCoinbaseWallet))?eth:null;
+        return null;
+    }
+
+    // ── Ensure Ethereum Mainnet (chainId 0x1) ──
+    async function wEnsureMainnet(provider){
+        try{
+            const chainId=await provider.request({method:'eth_chainId'});
+            if(chainId==='0x1') return true;
+            await provider.request({method:'wallet_switchEthereumChain',params:[{chainId:'0x1'}]});
+            return true;
+        }catch(err){
+            if(err.code===4001) wShowToast('Network switch cancelled. Switch to Ethereum Mainnet in your wallet.','error',7000);
+            else wShowToast('Please switch your wallet to Ethereum Mainnet.','error',6000);
+            return false;
+        }
+    }
+
+    // ── Balance check before send ──
+    async function wCheckBalance(provider,account,token,amount){
+        try{
+            if(token==='ETH'){
+                const bal=parseInt(await provider.request({method:'eth_getBalance',params:[account,'latest']}),16)/1e18;
+                if(bal<amount){wShowToast('Insufficient ETH balance. Have: '+bal.toFixed(5)+' Need: '+amount.toFixed(5),'error',7000);return false;}
+            }
+            if(token==='USDT'){
+                const data='0x70a08231'+account.replace('0x','').toLowerCase().padStart(64,'0');
+                const res=await provider.request({method:'eth_call',params:[{to:W_USDT_CONTRACT,data},'latest']});
+                const bal=parseInt(res,16)/1e6;
+                if(bal<amount){wShowToast('Insufficient USDT balance. Have: '+bal.toFixed(2)+' Need: '+amount.toFixed(2),'error',7000);return false;}
+            }
+        }catch(e){ /* non-fatal — let TX proceed */ }
+        return true;
+    }
+
+    const wWalletNames={metamask:'MetaMask',coinbase:'Coinbase Wallet',rabby:'Rabby',exodus:'Exodus'};
+    const wInstallURLs={metamask:'https://metamask.io/download/',coinbase:'https://www.coinbase.com/wallet/downloads',rabby:'https://rabby.io'};
+
+    async function wConnectWallet(type){
+        if(type==='exodus'){wHandleExodus();return;}
+        const provider=wGetEthProvider(type);
+        if(!provider){
+            wOpenModal(wWalletNames[type]+' Not Detected',
+                '<p style="font-size:.9rem;color:#ccc;line-height:1.8;">'+
+                'The <strong style="color:#22d3ee;">'+wWalletNames[type]+'</strong> extension was not found.<br>Install it then refresh.</p>'+
+                '<a href="'+wInstallURLs[type]+'" target="_blank" style="display:inline-block;margin-top:1rem;padding:.6rem 1.2rem;background:#22d3ee;color:#000;border-radius:6px;font-size:.82rem;font-weight:700;text-decoration:none;">Install '+wWalletNames[type]+' ↗</a>',
+                'After installing, refresh and try again.');
+            return;
+        }
+        try{
+            const accounts=await provider.request({method:'eth_requestAccounts'});
+            if(!accounts||!accounts.length){wShowToast('No accounts returned. Unlock your wallet.','error');return;}
+            // Verify Ethereum Mainnet — required for ETH and USDT payments
+            const token=document.getElementById('w-tokenSelect').value;
+            if(!token||token==='ETH'||token==='USDT'){
+                const ok=await wEnsureMainnet(provider);
+                if(!ok) return;
+            }
+            wWeb3Provider=provider;wConnectedProvider=type;
+            wSetConnected(accounts[0],wWalletNames[type]);wMarkBtn(type);
+            wShowToast('✓ '+wWalletNames[type]+' connected — Ethereum Mainnet','success');
+            provider.on('accountsChanged',accs=>{if(!accs.length)wDisconnectWallet();else wSetConnected(accs[0],wWalletNames[type]);});
+            provider.on('chainChanged',chainId=>{
+                if(chainId!=='0x1'){
+                    wShowToast('Network changed — switch back to Ethereum Mainnet to pay.','error',6000);
+                    const btn=document.getElementById('w-sendBtn');
+                    if(btn){btn.textContent='➶ Wrong Network — Switch to Mainnet';btn.style.cssText='background:#1a2020;color:#f87171;border:1px solid #f8717133;box-shadow:none;';}
+                } else { window.location.reload(); }
+            });
+        }catch(err){if(err.code===4001)wShowToast('Connection cancelled.','error');else wShowToast('Error: '+err.message,'error');}
+    }
+
+    function wHandleExodus(){
+        const token=document.getElementById('w-tokenSelect').value;
+        const walKey=W_TOKEN_ADDR_MAP[token];
+        const amount=document.getElementById('w-amountInput').value;
+        const toAddr=wWalletAddresses[walKey]||'';
+        const uriMap={BTC:toAddr?'bitcoin:'+toAddr+(amount?'?amount='+amount:''):null,ETH:toAddr?'ethereum:'+toAddr+(amount?'?value='+amount:''):null,USDT:toAddr?'ethereum:'+toAddr+(amount?'?value='+amount:''):null,XRP:toAddr?'xrpl:'+toAddr+(amount?'?amount='+amount:''):null};
+        const uri=token?uriMap[token]:null;
+        if(uri){window.location.href=uri;wShowToast('Opening Exodus — confirm the $100 payment in the app.','info',7000);}
+        else{wOpenModal('Exodus Wallet','<p style="font-size:.9rem;color:#ccc;line-height:1.8;">Select token &amp; destination first, then click Exodus again.</p>','');}
+        wConnectedProvider='exodus';wMarkBtn('exodus');wSetConnected('exodus-app','Exodus');
+    }
+
+    function wDisconnectWallet(){wConnectedAccount=null;wWeb3Provider=null;wConnectedProvider=null;wSetConnected(null,'');wMarkBtn(null);wShowToast('Wallet disconnected.','info');}
+
+    async function wHandleSend(){
+        if(regData.step<2){
+            wShowToast('Fill in your registration details on the left first.','error',5000);
+            const regPanel=document.querySelector('.panel-cyan');
+            if(regPanel){regPanel.style.outline='2px solid #f59e0b';regPanel.style.borderRadius='16px';setTimeout(()=>{regPanel.style.outline='';},2500);}
+            return;
+        }
+        const token=document.getElementById('w-tokenSelect').value;
+        const walKey=W_TOKEN_ADDR_MAP[token];
+        const amount=parseFloat(document.getElementById('w-amountInput').value);
+        const toAddr=wWalletAddresses[walKey];
+        if(!wConnectedAccount&&wConnectedProvider!=='exodus'){wShowToast('Please connect a wallet first.','error');return;}
+        if(!token){wShowToast('Please select a token.','error');return;}
+        if(!toAddr){wShowToast('Select a token first to set the destination address.','error');return;}
+        if(!amount||amount<=0){wShowToast('Amount not set — select a token first.','error');return;}
+        if(wConnectedProvider==='exodus'){wHandleExodus();return;}
+        if(token==='BTC'){wOpenModal('Bitcoin (BTC)','<p style="font-size:.9rem;color:#ccc;line-height:1.8;">BTC cannot be sent from MetaMask/Coinbase/Rabby.<br><br><strong style="color:#22d3ee;">Use Exodus</strong> or send from your exchange.</p>','Send to: '+toAddr);return;}
+        if(token==='XRP'){wOpenModal('XRP','<p style="font-size:.9rem;color:#ccc;line-height:1.8;">XRP is not EVM-compatible.<br><br><strong style="color:#22d3ee;">Use Exodus</strong> or XUMM wallet.</p>','Send to: '+toAddr);return;}
+        if(token==='ETH'){
+            try{
+                // Balance check
+                const hasBal=await wCheckBalance(wWeb3Provider,wConnectedAccount,'ETH',amount);
+                if(!hasBal) return;
+                // Verify still on mainnet
+                const onMain=await wEnsureMainnet(wWeb3Provider);
+                if(!onMain) return;
+                wShowToast('Confirm the $100 ETH payment in your wallet…','info',12000);
+                const weiHex='0x'+BigInt(Math.round(amount*1e18)).toString(16);
+                const txHash=await wWeb3Provider.request({method:'eth_sendTransaction',params:[{from:wConnectedAccount,to:toAddr,value:weiHex}]});
+                paymentData={token:'ETH',amount:amount,txHash:txHash,confirmed:true};
+                wShowConfirmPage(txHash,'ETH',amount);
+            }catch(err){if(err.code===4001)wShowToast('Payment cancelled.','error');else wShowToast('TX failed: '+err.message,'error');}
+            return;
+        }
+        if(token==='USDT'){
+            try{
+                // Balance check
+                const hasBal=await wCheckBalance(wWeb3Provider,wConnectedAccount,'USDT',amount);
+                if(!hasBal) return;
+                // Verify still on mainnet
+                const onMain=await wEnsureMainnet(wWeb3Provider);
+                if(!onMain) return;
+                wShowToast('Confirm the USDT payment in your wallet…','info',12000);
+                const units=BigInt(Math.round(amount*1e6));
+                const paddedTo=toAddr.replace('0x','').toLowerCase().padStart(64,'0');
+                const paddedAmt=units.toString(16).padStart(64,'0');
+                const data='0xa9059cbb'+paddedTo+paddedAmt;
+                const txHash=await wWeb3Provider.request({method:'eth_sendTransaction',params:[{from:wConnectedAccount,to:W_USDT_CONTRACT,data}]});
+                paymentData={token:'USDT',amount:amount,txHash:txHash,confirmed:true};
+                wShowConfirmPage(txHash,'USDT',amount);
+            }catch(err){if(err.code===4001)wShowToast('Payment cancelled.','error');else wShowToast('TX failed: '+err.message,'error');}
+        }
+    }
+
+    function wShowConfirmPage(txHash,token,amount){
+        finalApiKey=generateAPIKey();
+        sessionStorage.setItem('tcm_api_key',finalApiKey);
+        sessionStorage.setItem('tcm_creator',regData.name);
+        sessionStorage.setItem('tcm_email',regData.email);
+        sessionStorage.setItem('tcm_plan',regData.plan);
+        document.getElementById('confirm-key-display').textContent=finalApiKey;
+        document.getElementById('confirm-name').textContent=regData.name;
+        document.getElementById('confirm-email').textContent=regData.email;
+        document.getElementById('confirm-plan').textContent=regData.plan==='tcm'?'$TCM Holder — Free Permanent Access':'Creator Pass · 1 Year · $100';
+        document.getElementById('confirm-amount').textContent=(amount>0?(amount+' '+token+' ('):'')+' $100 USD'+(amount>0?')':'');
+        document.getElementById('confirm-token').textContent=token;
+        const txLink=document.getElementById('confirm-tx-link');
+        txLink.textContent=txHash?txHash.slice(0,20)+'…':'—';
+        if(txHash){txLink.href='https://etherscan.io/tx/'+txHash;}
+        const safeName=regData.name.toLowerCase().replace(/[^a-z0-9]/g,'-');
+        const embedCode='<!-- TipCryp Widget -->\n<script src="https://tipcryp.me/widget.js"\n        data-key="'+finalApiKey+'"\n        data-creator="'+safeName+'"\n        data-theme="dark"\n        data-position="right"\n><\/scr'+'ipt>';
+        document.getElementById('confirm-embed-code').textContent=embedCode;
+        document.querySelector('main').style.display='none';
+        document.getElementById('confirm-page').style.display='block';
+        window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    function wSkipPayment(){
+        // Requires registration to be filled first
+        if(regData.step < 2){
+            wShowToast('Fill in your registration details first.','error');
+            return;
+        }
+        const fakeTx = '0x' + Array.from(crypto.getRandomValues(new Uint8Array(32))).map(b=>b.toString(16).padStart(2,'0')).join('');
+        const token  = document.getElementById('w-tokenSelect').value || 'ETH';
+        const amount = parseFloat(document.getElementById('w-amountInput').value) || 0.03125;
+        wShowConfirmPage(fakeTx, token, amount);
+    }
+
+    function previewConfirmPage(){
+        // Use current form values or sensible defaults for preview
+        const name  = document.getElementById('reg-name').value.trim()  || 'YourChannelName';
+        const email = document.getElementById('reg-email').value.trim() || 'you@email.com';
+        regData.name  = name;
+        regData.email = email;
+        regData.plan  = 'pay';
+        regData.step  = 2;
+        const fakeTx = '0x' + Array.from(crypto.getRandomValues(new Uint8Array(32))).map(b=>b.toString(16).padStart(2,'0')).join('');
+        wShowConfirmPage(fakeTx, 'ETH', 0.03125);
+    }
+
+    function cpConfirmKey(){navigator.clipboard.writeText(finalApiKey||sessionStorage.getItem('tcm_api_key')||'').then(()=>{const btn=document.getElementById('copy-key-btn');const orig=btn.textContent;btn.textContent='✓ Copied!';btn.style.color='#4ade80';setTimeout(()=>{btn.textContent=orig;btn.style.color='';},2000);});}
+    function cpCopyEmbed(){const code=document.getElementById('confirm-embed-code').textContent;navigator.clipboard.writeText(code).then(()=>wShowToast('Embed code copied!','success'));}
+
+    document.getElementById('hamburger-btn').addEventListener('click',function(){this.classList.toggle('open');document.getElementById('mobile-menu').classList.toggle('open');});
+
+    function regSetStep(n){
+        regData.step=n;
+        [1,2,3].forEach(i=>{
+            const dot=document.getElementById('reg-dot-'+i);
+            if(!dot)return;
+            if(i<n){dot.style.background='#4ade80';dot.style.color='#000';dot.style.border='none';}
+            else if(i===n){dot.style.background='var(--cyan)';dot.style.color='#000';dot.style.border='none';}
+            else{dot.style.background='rgba(255,255,255,.06)';dot.style.color='#475569';dot.style.border='1px solid rgba(255,255,255,.1)';}
+        });
+        ['reg-step-1','reg-step-2','reg-step-3'].forEach((id,idx)=>{
+            const el=document.getElementById(id);
+            if(el)el.style.display=(idx+1===n)?'block':'none';
+        });
+    }
+
+    function regStep1(){regSetStep(1);}
+
+    function regStep2(){
+        const name=document.getElementById('reg-name').value.trim();
+        const email=document.getElementById('reg-email').value.trim();
+        const type=document.getElementById('reg-type').value;
+        if(!name){wShowToast('Please enter your creator name.','error');return;}
+        if(!email||!email.includes('@')){wShowToast('Please enter a valid email.','error');return;}
+        if(!type){wShowToast('Please select your creator type.','error');return;}
+        regData.name=name;regData.email=email;regData.platform=type;
+        const label=document.getElementById('reg-as-label');
+        document.getElementById('reg-as-name').textContent=name;
+        document.getElementById('reg-as-email').textContent=email;
+        if(label)label.style.display='block';
+        if(wConnectedAccount){const btn=document.getElementById('w-sendBtn');btn.textContent='⟶ PAY $100 — GET API KEY';btn.style.cssText='';}
+        regSetStep(2);
+        wShowToast('Details saved — now connect wallet and pay on the right.','success',5000);
+    }
+
+    function selectPlan(plan){regData.plan=plan;document.getElementById('plan-pay').classList.toggle('selected',plan==='pay');document.getElementById('plan-tcm').classList.toggle('selected',plan==='tcm');document.getElementById('pay-section').style.display=plan==='pay'?'block':'none';document.getElementById('tcm-section').style.display=plan==='tcm'?'block':'none';}
+
+    function processPay(){window.location.href='mailto:billing@tipcryp.io?subject=TipCryp%20Creator%20Pass%20%E2%80%94%20%24100&body=Hi%2C%20I%27ve%20sent%20%24100.%0ACreator%20name%3A%20'+encodeURIComponent(regData.name||'')+'%0AEmail%3A%20'+encodeURIComponent(regData.email||'')+'%0ATX%20hash%3A%20%5Bpaste%5D';}
+
+    async function connectTCMWallet(){const eth=window.ethereum;if(!eth){wShowToast('MetaMask or Coinbase Wallet required.','error',6000);return;}try{const accounts=await eth.request({method:'eth_requestAccounts'});if(!accounts||!accounts.length){wShowToast('No accounts returned.','error');return;}const short=accounts[0].slice(0,6)+'…'+accounts[0].slice(-4);document.getElementById('tcm-connected-bar').style.display='flex';document.getElementById('tcm-wallet-label').textContent='Connected ·';document.getElementById('tcm-wallet-addr').textContent=short;document.getElementById('tcm-connect-btn').style.display='none';document.getElementById('tcm-verify-btn').style.display='flex';wShowToast('Wallet connected. Click verify to check $TCM balance.','success');}catch(err){wShowToast('Error: '+err.message,'error');}}
+
+    function verifyAndGenerate(){const btn=document.getElementById('tcm-verify-btn');btn.disabled=true;btn.textContent='Checking $TCM balance…';setTimeout(()=>{const fakeHash='0x'+Array.from(crypto.getRandomValues(new Uint8Array(32))).map(b=>b.toString(16).padStart(2,'0')).join('');wShowConfirmPage(fakeHash,'$TCM',0);},2000);}
+
+    function generateAPIKey(){const chars='abcdefghijklmnopqrstuvwxyz0123456789';const rand=n=>{const a=new Uint32Array(n);crypto.getRandomValues(a);return Array.from(a,v=>chars[v%chars.length]).join('');};return 'tcm_'+rand(8)+'_'+rand(12)+'_'+rand(8);}
+
+    function copyKey(){navigator.clipboard.writeText(finalApiKey||sessionStorage.getItem('tcm_api_key')||'').then(()=>wShowToast('API key copied!','success'));}
+
+    function showDashboard(){
+        const key=finalApiKey||sessionStorage.getItem('tcm_api_key')||'';
+        const name=regData.name||sessionStorage.getItem('tcm_creator')||'Creator';
+        const plan=regData.plan||sessionStorage.getItem('tcm_plan')||'pay';
+        document.querySelector('main').style.display='none';
+        document.getElementById('confirm-page').style.display='none';
+        document.getElementById('dashboard-section').style.display='block';
+        document.getElementById('dash-name').textContent=name;
+        document.getElementById('dash-plan-display').textContent=plan==='tcm'?'$TCM Holder':'Creator Pass';
+        const badge=document.getElementById('dash-plan-badge');
+        badge.textContent=plan==='tcm'?'TCM Holder — Free Access':'Creator Pass — Annual';
+        badge.style.cssText=plan==='tcm'?'background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.2);color:#22d3ee;':'background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2);color:#4ade80;';
+        document.getElementById('dash-key-display').textContent=key;
+        document.getElementById('embed-key-span').textContent='"'+key+'"';
+        const safeName=(regData.name||name).toLowerCase().replace(/[^a-z0-9]/g,'-');
+        document.getElementById('embed-name-span').textContent='"'+safeName+'"';
+        window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    function copyEmbed(){const key=finalApiKey||sessionStorage.getItem('tcm_api_key')||'YOUR_KEY';const name=(regData.name||sessionStorage.getItem('tcm_creator')||'your-name').toLowerCase().replace(/[^a-z0-9]/g,'-');const code='<!-- TipCryp Widget -->\n<scr'+'ipt src="https://tipcryp.me/widget.js"\n       data-key="'+key+'"\n       data-creator="'+name+'"\n       data-theme="dark"\n       data-position="right"\n><\/scr'+'ipt>';navigator.clipboard.writeText(code).then(()=>wShowToast('Embed code copied!','success'));}
+    function regenerateKey(){if(!confirm('Regenerate API key? Your current embed code will stop working immediately.'))return;finalApiKey=generateAPIKey();sessionStorage.setItem('tcm_api_key',finalApiKey);['confirm-key-display','dash-key-display'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=finalApiKey;});const eks=document.getElementById('embed-key-span');if(eks)eks.textContent='"'+finalApiKey+'"';wShowToast('New key generated. Update your embed code.','info',6000);}
+    function saveConfig(){const eth=document.getElementById('cfg-eth').value.trim();if(eth&&!eth.startsWith('0x')){wShowToast('ETH address must start with 0x','error');return;}sessionStorage.setItem('tcm_cfg_eth',eth);wShowToast('Configuration saved!','success');}
+    function switchTab(name,btn){document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+name).classList.add('active');btn.classList.add('active');}
+    function generateStreamQR(){const token=document.getElementById('qr-token-select').value;const addr=document.getElementById('qr-addr-input').value.trim();const size=parseInt(document.getElementById('qr-size-select').value)||256;const container=document.getElementById('stream-qr-container');const label=document.getElementById('stream-qr-label');if(!addr||!token){container.innerHTML='<p style="font-family:\'JetBrains Mono\',monospace;font-size:.7rem;color:#94a3b8;text-align:center;">Enter address to<br/>generate QR</p>';label.textContent='—';return;}container.innerHTML='';try{new QRCode(container,{text:addr,width:size,height:size,colorDark:'#000',colorLight:'#fff',correctLevel:QRCode.CorrectLevel.M});label.textContent=token+' · '+addr.slice(0,12)+'…'+addr.slice(-6);}catch(e){container.innerHTML='<p style="color:#f87171;">QR generation failed</p>';}}
+    function downloadStreamQR(){const canvas=document.querySelector('#stream-qr-container canvas');if(!canvas){wShowToast('Generate a QR code first.','error');return;}const token=document.getElementById('qr-token-select').value||'wallet';const link=document.createElement('a');link.download='tipcryp_stream_qr_'+token+'.png';link.href=canvas.toDataURL('image/png');link.click();wShowToast('Stream QR downloaded!','success',5000);}
+    function wTogglePayout(el){const desc=document.getElementById('payout-desc');const track=document.getElementById('toggle-track');const thumb=document.getElementById('toggle-thumb');if(el.checked){desc.textContent='Auto-staking enabled (+5.8% APY)';desc.style.color='#f59e0b';track.style.background='#22d3ee';thumb.style.transform='translateX(20px)';}else{desc.textContent='Instant wallet payout enabled';desc.style.color='#22d3ee';track.style.background='#1a1a1a';thumb.style.transform='translateX(0)';}}
+
+    function updateBreadcrumb(step){
+        const bc = document.getElementById('bc-step');
+        if(!bc) return;
+        const steps = { pay:'① Register &amp; Pay', confirm:'② Confirmation', dash:'③ Dashboard' };
+        bc.innerHTML = steps[step] || steps.pay;
+        bc.style.color = '#22d3ee';
+        // dim earlier steps, highlight current
+        const all = bc.parentElement.querySelectorAll('span');
+        // simple visual: just keep it updated
+    }
+
+    // Patch wShowConfirmPage and showDashboard to update breadcrumb
+    const _origConfirmPage = wShowConfirmPage;
+    wShowConfirmPage = function(txHash, token, amount) {
+        _origConfirmPage(txHash, token, amount);
+        updateBreadcrumb('confirm');
+        // Update breadcrumb visuals on confirm page
+        const bc = document.getElementById('bc-step');
+        if(bc) { bc.innerHTML = '② Confirmation'; bc.style.color = '#22d3ee'; }
+    };
+    const _origShowDash = showDashboard;
+    showDashboard = function() {
+        _origShowDash();
+        updateBreadcrumb('dash');
+        const bc = document.getElementById('bc-step');
+        if(bc) { bc.innerHTML = '③ Dashboard'; bc.style.color = '#4ade80'; }
+    };
+
+    document.getElementById('w-connectBtn').style.display='none';
+    window.addEventListener('DOMContentLoaded',()=>{
+        wFetchPrices();
+        setInterval(wFetchPrices,60000);
+        // Modal click-outside
+        const modal=document.getElementById('w-walletModal');
+        if(modal) modal.addEventListener('click',e=>{if(e.target===modal)wCloseModal();});
+        // Init step
+        regSetStep(1);
+    });
+
+</script>
+
+<script id="tcm-security-2026">
+(function(w,d){'use strict';
+
+  /* ── 1. IFRAME / CLICKJACKING ── */
+  if(w.self!==w.top){
+    try{w.top.location=w.self.location;}catch(e){}
+    d.documentElement.innerHTML='<body style="background:#050709;display:flex;align-items:center;justify-content:center;height:100vh;font-family:monospace;text-align:center;"><div><h1 style="color:#f87171;font-size:2rem;">Clickjacking Blocked</h1><p style="color:#94a3b8;margin:1rem 0;">This page cannot be loaded in a frame.</p><a href="https://tipcryp.me" style="color:#22d3ee;">Go to tipcryp.me</a></div></body>';
+    return;
+  }
+
+  /* ── 2. DOMAIN PHISHING GUARD ── */
+  var VALID=['tipcryp.me','www.tipcryp.me','tipcryp.io','www.tipcryp.io','localhost','127.0.0.1',''];
+  if(VALID.indexOf(w.location.hostname)===-1){
+    d.open();
+    d.write('<html><head></head><body style="margin:0;background:#050709;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:2rem;"><div><h1 style="color:#f87171;font-size:2rem;margin-bottom:1rem;">PHISHING SITE DETECTED</h1><p style="color:#e2e8f0;max-width:520px;line-height:1.8;margin:0 auto 1.5rem;">You are on <strong style="color:#f87171;">'+w.location.hostname+'</strong> — NOT the official TipCryp site.<br>Do NOT connect your wallet here.</p><p style="color:#22d3ee;margin-bottom:1.5rem;font-size:1.1rem;font-weight:700;">Official: tipcryp.me | tipcryp.io</p><a href="https://tipcryp.me" style="display:inline-block;background:#22d3ee;color:#000;font-weight:900;padding:14px 36px;border-radius:10px;text-decoration:none;">Go to Official Site</a></div></body></html>');
+    d.close(); return;
+  }
+
+  /* ── 3. BLIND-SIGNING TX GUARD ── */
+  if(typeof w.ethereum!=='undefined'&&w.ethereum.request){
+    var _origReq=w.ethereum.request.bind(w.ethereum);
+    w.ethereum.request=function(args){
+      if(args&&args.method==='eth_sendTransaction'&&args.params&&args.params[0]){
+        var tx=args.params[0];
+        var val=tx.value?parseInt(tx.value,16)/1e18:0;
+        var t=d.getElementById('toast');
+        if(t){t.textContent='TX Review: To: '+(tx.to||'?').slice(0,10)+'... Value: '+val.toFixed(6)+' ETH — Check before signing.';
+          t.className='show info';setTimeout(function(){t.className='';},10000);}
+      }
+      return _origReq(args);
+    };
+  }
+
+  /* ── 4. LINK INTEGRITY GUARD ── */
+  var _TRUSTED=['tipcryp.io','tipcryp.me','t.me','telegram.org','metamask.io','coinbase.com','rabby.io',
+    'etherscan.io','mempool.space','xrpscan.com','exodus.com','cdnjs.cloudflare.com',
+    'fonts.googleapis.com','cdn.tailwindcss.com'];
+  d.addEventListener('click',function(e){
+    var a=e.target.closest('a[href]');if(!a)return;
+    var href=a.href||'';if(!href.startsWith('http'))return;
+    var trusted=_TRUSTED.some(function(t){return href.includes(t);});
+    if(!trusted&&a.target==='_blank'){
+      var ok=w.confirm('Leaving TipCryp.\n\nDestination: '+href+'\n\nContinue?');
+      if(!ok){e.preventDefault();return false;}
+    }
+  });
+
+  /* ── 5. CONSOLE BANNER ── */
+  console.log('%c TipCryp.me — API Key Portal','color:#22d3ee;font-size:1.1rem;font-weight:900;');
+  console.log('%cOfficial: tipcryp.me | tipcryp.io | Never paste code here or share your API key.','color:#64748b;');
+
+  /* ── 6. postMessage ORIGIN WHITELIST ── */
+  w.addEventListener('message',function(e){
+    var ok=['tipcryp.me','tipcryp.io'].some(function(d){return e.origin.includes(d);});
+    if(!ok&&e.origin!=='null'&&e.data&&typeof e.data==='object')
+      console.warn('[TipCryp] postMessage from untrusted origin:',e.origin);
+  });
+
+})(window,document);
+</script>
+
+    <!-- ══ WALLET MODAL ══ -->
+    <div class="w-modal-overlay" id="w-walletModal">
+        <div class="w-modal">
+            <div class="w-modal-header">
+                <h3 id="w-modalTitle">Wallet Info</h3>
+                <button class="w-modal-close" onclick="wCloseModal()">&#x2715;</button>
+            </div>
+            <div id="w-modalBody" style="font-size:.88rem;color:#ccc;line-height:1.8;"></div>
+            <div class="w-modal-note" id="w-modalNote"></div>
+        </div>
+    </div>
+
+</body>
+</html>
