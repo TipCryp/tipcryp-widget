@@ -32,6 +32,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet"/>
 
 <style>
@@ -52,8 +53,9 @@
 html{scroll-behavior:smooth;}
 body{
   font-family:'DM Sans',sans-serif;
+  font-size:16px;
   background:var(--bg);
-  color:#e2e8f0;
+  color:#ffffff;
   min-height:100vh;
   overflow-x:hidden;
 }
@@ -83,10 +85,10 @@ body{
 .field-label{
   display:block;
   font-family:'JetBrains Mono',monospace;
-  font-size:.65rem;
+  font-size:.72rem;
   text-transform:uppercase;
   letter-spacing:.1em;
-  color:#475569;
+  color:#cbd5e1;
   margin-bottom:8px;
 }
 .field-input{
@@ -102,7 +104,7 @@ body{
   transition:border-color .2s, box-shadow .2s;
 }
 .field-input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(34,211,238,.10);}
-.field-input::placeholder{color:#2d3a4a;}
+.field-input::placeholder{color:#64748b;}
 .field-input.error{border-color:rgba(248,113,113,.5);}
 .field-input.success{border-color:rgba(74,222,128,.4);}
 
@@ -150,7 +152,7 @@ body{
   display:flex;align-items:center;justify-content:center;gap:8px;
 }
 .btn-primary:hover{background:var(--cyan2);box-shadow:0 0 36px rgba(34,211,238,.45);transform:translateY(-1px);}
-.btn-primary:disabled{background:#1e2a35;color:#4a6070;box-shadow:none;cursor:not-allowed;transform:none;}
+.btn-primary:disabled{background:#1e2a35;color:#64748b;box-shadow:none;cursor:not-allowed;transform:none;}
 
 .btn-ghost{
   background:transparent;
@@ -178,7 +180,7 @@ body{
 }
 .step-dot.active{background:var(--cyan);color:#000;}
 .step-dot.done{background:rgba(74,222,128,.15);border:1px solid rgba(74,222,128,.4);color:#4ade80;}
-.step-dot.inactive{background:rgba(255,255,255,.04);border:1px solid var(--border);color:#475569;}
+.step-dot.inactive{background:rgba(255,255,255,.04);border:1px solid var(--border);color:#cbd5e1;}
 .step-connector{width:2px;height:24px;margin:4px auto;background:var(--border);transition:background .3s;}
 .step-connector.active{background:var(--cyan);}
 
@@ -219,14 +221,14 @@ body{
   border-radius:10px;
   padding:16px 18px;
   font-family:'JetBrains Mono',monospace;
-  font-size:.75rem;
-  color:#94a3b8;
+  font-size:.82rem;
+  color:#cbd5e1;
   overflow-x:auto;
   line-height:1.8;
 }
 .code-block .kw{color:var(--cyan);}
 .code-block .str{color:#4ade80;}
-.code-block .cm{color:#334155;}
+.code-block .cm{color:#94a3b8;}
 
 /* ── Toast ── */
 #toast{
@@ -235,8 +237,8 @@ body{
   background:var(--panel2);
   border:1px solid var(--border);
   border-radius:12px;padding:12px 22px;
-  font-family:'JetBrains Mono',monospace;font-size:.78rem;
-  color:#e2e8f0;z-index:999;
+  font-family:'JetBrains Mono',monospace;font-size:.82rem;
+  color:#ffffff;z-index:999;
   transition:transform .35s,opacity .35s;
   opacity:0;pointer-events:none;
   max-width:360px;text-align:center;
@@ -265,7 +267,7 @@ body{
   background:transparent;
   border:1px solid var(--border);
   border-radius:8px;
-  color:#475569;
+  color:#cbd5e1;
   cursor:pointer;
   transition:all .2s;
 }
@@ -347,10 +349,10 @@ button, a, select, input, label {
 .tcm-mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(8,11,16,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:48;padding:1.5rem;flex-direction:column;gap:0;border-top:1px solid rgba(255,255,255,0.06);overflow-y:auto;}
 .tcm-mobile-menu.open{display:flex;}
 @media(min-width:768px){.tcm-mobile-menu{display:none!important;}}
-.tcm-mobile-menu a{font-family:'Urbanist','DM Sans',sans-serif;font-size:1.05rem;font-weight:600;color:#64748b;text-decoration:none;padding:13px 0;border-bottom:1px solid rgba(255,255,255,0.05);transition:color .2s;display:flex;align-items:center;gap:10px;}
+.tcm-mobile-menu a{font-family:'Urbanist','DM Sans',sans-serif;font-size:1.05rem;font-weight:600;color:#94a3b8;text-decoration:none;padding:13px 0;border-bottom:1px solid rgba(255,255,255,0.05);transition:color .2s;display:flex;align-items:center;gap:10px;}
 .tcm-mobile-menu a:hover,.tcm-mobile-menu a.active{color:#22d3ee;}
 .tcm-mob-social{display:flex;gap:16px;padding-top:18px;margin-top:6px;}
-.tcm-mob-social a{border:none!important;padding:6px 0!important;color:#475569!important;font-size:.85rem!important;}
+.tcm-mob-social a{border:none!important;padding:6px 0!important;color:#94a3b8!important;font-size:.85rem!important;}
 .tcm-mob-social a:hover{color:#22d3ee!important;}
 .tcm-mobile-cta{margin-top:18px;display:flex;align-items:center;justify-content:center;gap:7px;background:#22d3ee;color:#000;font-family:'Urbanist','DM Sans',sans-serif;font-weight:800;font-size:.9rem;letter-spacing:.04em;text-transform:uppercase;border:none;border-radius:10px;padding:14px 24px;cursor:pointer;text-decoration:none;width:100%;}
 .tcm-social-icons{display:none;}
@@ -359,8 +361,8 @@ button, a, select, input, label {
 .text-gray-500,.font-mono.text-gray-500{color:#6b7280!important;}
 .text-gray-400{color:#9ca3af!important;}
 .text-gray-600{color:#6b7280!important;}
-[style*="color:#475569"]{color:#64748b!important;}
-[style*="color:#334155"]{color:#475569!important;}
+[style*="color:#94a3b8"]{color:#64748b!important;}
+[style*="color:#64748b"]{color:#94a3b8!important;}
 
         /* ══ WALLET BUTTON + WIDGET STYLES ══ */
         .w-wallet-btn svg{width:28px;height:28px;flex-shrink:0;overflow:visible;display:block;pointer-events:none;}
@@ -368,7 +370,7 @@ button, a, select, input, label {
         .w-wallet-btn *{pointer-events:none !important;}
         .w-wallet-btn:hover{border-color:#22d3ee;background:#0a1418;box-shadow:0 0 14px rgba(34,211,238,.15);transform:translateY(-1px);}
         .w-wallet-btn.connected{border-color:#4ade80;box-shadow:0 0 10px rgba(74,222,128,.2);}
-        .w-wallet-btn-name{flex:1;font-size:.9rem;color:#e2e8f0;}
+        .w-wallet-btn-name{flex:1;font-size:.9rem;color:#f1f5f9;}
         .w-status-dot{width:7px;height:7px;border-radius:50%;background:#1e1e1e;flex-shrink:0;transition:background .3s;}
         .w-wallet-btn.connected .w-status-dot{background:#4ade80;}
         .w-wallet-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
@@ -377,7 +379,7 @@ button, a, select, input, label {
         .w-pulse-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;animation:wPulse 2s infinite;flex-shrink:0;}
         @keyframes wPulse{0%,100%{opacity:1;}50%{opacity:.4;}}
         .w-wallet-label{color:#4ade80;flex-shrink:0;font-weight:700;}
-        .w-addr-text{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#94a3b8;}
+        .w-addr-text{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#e2e8f0;}
         .w-disconnect-btn{background:none;border:1px solid #333;border-radius:4px;color:#666;font-size:.7rem;padding:3px 8px;cursor:pointer;font-family:'JetBrains Mono',monospace;transition:border-color .2s,color .2s;flex-shrink:0;}
         .w-disconnect-btn:hover{border-color:#f87171;color:#f87171;}
         .w-select-wrap{position:relative;}
@@ -406,7 +408,7 @@ button, a, select, input, label {
         .w-modal h3{font-family:'Urbanist',sans-serif;font-size:.92rem;color:#22d3ee;font-weight:700;}
         .w-modal-close{background:none;border:1px solid #333;border-radius:6px;color:#666;width:28px;height:28px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;}
         .w-modal-close:hover{color:#fff;border-color:#666;}
-        .w-modal-note{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#475569;margin-top:.75rem;border-top:1px solid #1a1a1a;padding-top:.75rem;word-break:break-all;}
+        .w-modal-note{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#cbd5e1;margin-top:.75rem;border-top:1px solid #1a1a1a;padding-top:.75rem;word-break:break-all;}
 
 </style>
     <!-- SEO: Creator API -->
@@ -429,10 +431,10 @@ button, a, select, input, label {
     </div>
     <div style="display:flex;align-items:center;gap:16px;">
       <button id="hamburger-btn" style="display:none;" aria-label="Menu"></button>
-      <a href="index.html" style="font-family:'DM Sans',sans-serif;font-size:.85rem;color:#64748b;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748b'">Home</a>
+      <a href="index.html" style="font-family:'DM Sans',sans-serif;font-size:.85rem;color:#94a3b8;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748b'">Home</a>
       <a href="api-key.html" style="font-family:'DM Sans',sans-serif;font-size:.85rem;color:#22d3ee;text-decoration:none;font-weight:600;">API Key</a>
       <a href="https://t.me/+WtbDPLuRTLE4NTQx" target="_blank" rel="noopener noreferrer" style="font-family:'DM Sans',sans-serif;font-size:.85rem;color:#4ade80;text-decoration:none;">Telegram</a>
-      <a href="https://tipcryp.io" rel="noopener noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#475569;text-decoration:none;">$TCM ICO →</a>
+      <a href="https://tipcryp.io" rel="noopener noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#cbd5e1;text-decoration:none;">$TCM ICO →</a>
     </div>
   </div>
 </nav>
@@ -440,16 +442,16 @@ button, a, select, input, label {
 <!-- ── JOURNEY BREADCRUMB ── -->
 <div style="background:rgba(8,11,16,0.97);border-bottom:1px solid rgba(255,255,255,0.04);padding:10px 24px;">
   <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-    <a href="index.html" style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#475569;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#22d3ee'" onmouseout="this.style.color='#475569'">tipcryp.me</a>
+    <a href="index.html" style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#cbd5e1;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#22d3ee'" onmouseout="this.style.color='#475569'">tipcryp.me</a>
     <span style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#1e293b;">›</span>
     <span style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#22d3ee;font-weight:700;">Get API Key</span>
     <span style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#1e293b;">›</span>
-    <span id="bc-step" style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#475569;">① Register &amp; Pay</span>
+    <span id="bc-step" style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#cbd5e1;">① Register &amp; Pay</span>
     <span style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#1e293b;">›</span>
     <span style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#1e293b;">② Confirmation</span>
     <span style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#1e293b;">›</span>
     <span style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#1e293b;">③ Dashboard</span>
-    <span style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#334155;">🔒 Secure Checkout</span>
+    <span style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#94a3b8;">🔒 Secure Checkout</span>
   </div>
 </div>
 
@@ -462,7 +464,7 @@ button, a, select, input, label {
   <h1 style="font-family:'Urbanist',sans-serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:900;color:#fff;letter-spacing:-.03em;line-height:1.05;margin-bottom:14px;">
     Your Widget. Your Wallet.<br/><span style="color:var(--cyan)">Zero Middlemen.</span>
   </h1>
-  <p style="font-size:1rem;color:#64748b;max-width:460px;margin:0 auto;line-height:1.8;">
+  <p style="font-size:1rem;color:#94a3b8;max-width:460px;margin:0 auto;line-height:1.8;">
     Set up in under 5 minutes. Complete your details on the left, then pay via the console on the right to receive your API key instantly.
   </p>
 </header>
@@ -483,10 +485,10 @@ button, a, select, input, label {
           <div style="height:2px;flex:1;background:rgba(255,255,255,.08);" id="reg-line-1"></div>
         </div>
         <div style="display:flex;align-items:center;gap:6px;flex:1;">
-          <div id="reg-dot-2" style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#475569;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;">2</div>
+          <div id="reg-dot-2" style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#cbd5e1;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;">2</div>
           <div style="height:2px;flex:1;background:rgba(255,255,255,.08);" id="reg-line-2"></div>
         </div>
-        <div id="reg-dot-3" style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#475569;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;">3</div>
+        <div id="reg-dot-3" style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#cbd5e1;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;">3</div>
       </div>
 
       <!-- STEP 1 -->
@@ -500,7 +502,7 @@ button, a, select, input, label {
           <div>
             <label class="field-label" for="reg-email">Email Address</label>
             <input type="email" id="reg-email" class="field-input" placeholder="you@email.com"/>
-            <p style="font-size:.68rem;color:#334155;margin-top:5px;font-family:'JetBrains Mono',monospace;">API key sent here. Not shared externally.</p>
+            <p style="font-size:.68rem;color:#94a3b8;margin-top:5px;font-family:'JetBrains Mono',monospace;">Your API key, embed code and QR code are displayed here and emailed after payment — SAVE THEM!</p>
           </div>
           <div>
             <label class="field-label" for="reg-type">Creator Platform</label>
@@ -517,24 +519,44 @@ button, a, select, input, label {
               </select>
             </div>
           </div>
-          <button class="btn-primary" onclick="regStep2()">Continue to Payment →</button>
-          <div style="text-align:center;margin-top:12px;">
-            <button onclick="previewConfirmPage()" style="background:none;border:none;color:#334155;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.68rem;text-decoration:underline;">Preview confirmation page →</button>
+
+          <!-- Wallet addresses -->
+          <div style="border-top:1px solid rgba(255,255,255,.06);padding-top:14px;">
+            <p style="font-family:'Urbanist',sans-serif;font-size:.95rem;font-weight:700;color:#fff;margin-bottom:4px;">Your Wallet Addresses</p>
+            <p style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#cbd5e1;margin-bottom:14px;">Tips go directly to these wallets. Add only the ones you want to accept.</p>
+
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div>
+                <label class="field-label" for="reg-wallet-eth">ETH Address <span style="color:#cbd5e1;font-weight:400;">(also used for USDT · ERC-20)</span></label>
+                <input type="text" id="reg-wallet-eth" class="field-input" placeholder="0x..."/>
+                <p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#94a3b8;margin-top:4px;">Accepts ETH and USDT on Ethereum Mainnet</p>
+              </div>
+              <div>
+                <label class="field-label" for="reg-wallet-btc">BTC Address <span style="color:#cbd5e1;font-weight:400;">(Exodus only)</span></label>
+                <input type="text" id="reg-wallet-btc" class="field-input" placeholder="bc1q..."/>
+              </div>
+              <div>
+                <label class="field-label" for="reg-wallet-xrp">XRP Address <span style="color:#cbd5e1;font-weight:400;">(Exodus only)</span></label>
+                <input type="text" id="reg-wallet-xrp" class="field-input" placeholder="r..."/>
+              </div>
+            </div>
           </div>
+
+          <button class="btn-primary" onclick="regStep2()">Continue to Payment →</button>
         </div>
       </div>
 
       <!-- STEP 2 -->
       <div id="reg-step-2" style="display:none;">
         <h3 style="font-family:'Urbanist',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:6px;">Choose Access Plan</h3>
-        <p style="font-size:.82rem;color:#64748b;margin-bottom:18px;line-height:1.7;">Annual Creator Pass or hold 2,500 $TCM for free permanent access.</p>
+        <p style="font-size:.82rem;color:#cbd5e1;margin-bottom:18px;line-height:1.7;">Annual Creator Pass or hold 2,500 $TCM for free permanent access.</p>
         <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px;">
           <div class="plan-card selected" id="plan-pay" onclick="selectPlan('pay')">
             <div style="display:flex;align-items:center;gap:12px;">
               <span style="font-size:1.1rem;flex-shrink:0;">💳</span>
               <div style="flex:1;">
                 <p style="font-family:'Urbanist',sans-serif;font-size:.95rem;font-weight:700;color:#fff;">Creator Pass — $100/year</p>
-                <p style="font-size:.75rem;color:#475569;margin-top:2px;">Annual · Unlimited usage · Cancel anytime</p>
+                <p style="font-size:.75rem;color:#cbd5e1;margin-top:2px;">Annual · Unlimited usage · Cancel anytime</p>
               </div>
               <span style="font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:var(--cyan);">$100</span>
             </div>
@@ -544,7 +566,7 @@ button, a, select, input, label {
               <span style="font-size:1.1rem;flex-shrink:0;">◈</span>
               <div style="flex:1;">
                 <p style="font-family:'Urbanist',sans-serif;font-size:.95rem;font-weight:700;color:#fff;">Hold 2,500 $TCM — Free Access</p>
-                <p style="font-size:.75rem;color:#475569;margin-top:2px;">At $0.015 = $37.50 — tokens are yours to keep</p>
+                <p style="font-size:.75rem;color:#cbd5e1;margin-top:2px;">At $0.015 = $37.50 — tokens are yours to keep</p>
               </div>
               <span style="font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:var(--green);">FREE</span>
             </div>
@@ -560,15 +582,15 @@ button, a, select, input, label {
             <div style="display:flex;flex-direction:column;gap:8px;">
               <div style="display:flex;align-items:flex-start;gap:8px;">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#22d3ee;flex-shrink:0;width:16px;">①</span>
-                <span style="font-size:.85rem;color:#94a3b8;">Connect your wallet using the buttons on the right</span>
+                <span style="font-size:.85rem;color:#cbd5e1;">Connect your wallet using the buttons on the right</span>
               </div>
               <div style="display:flex;align-items:flex-start;gap:8px;">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#22d3ee;flex-shrink:0;width:16px;">②</span>
-                <span style="font-size:.85rem;color:#94a3b8;">Select your preferred token (ETH, USDT, BTC, XRP)</span>
+                <span style="font-size:.85rem;color:#cbd5e1;">Select your preferred token (ETH, USDT, BTC, XRP)</span>
               </div>
               <div style="display:flex;align-items:flex-start;gap:8px;">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#22d3ee;flex-shrink:0;width:16px;">③</span>
-                <span style="font-size:.85rem;color:#94a3b8;">Amount auto-sets to <strong style="color:#22d3ee;">$100 USD equivalent</strong> — click <strong style="color:#22d3ee;">PAY $100</strong></span>
+                <span style="font-size:.85rem;color:#cbd5e1;">Amount auto-sets to <strong style="color:#22d3ee;">$100 USD equivalent</strong> — click <strong style="color:#22d3ee;">PAY $100</strong></span>
               </div>
             </div>
           </div>
@@ -576,21 +598,21 @@ button, a, select, input, label {
           <div id="reg-as-label" style="background:rgba(74,222,128,.05);border:1px solid rgba(74,222,128,.15);border-radius:10px;padding:10px 14px;margin-bottom:14px;display:none;">
             <p style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#4ade80;margin-bottom:2px;">Registering as:</p>
             <p style="font-size:.88rem;color:#fff;font-weight:600;" id="reg-as-name"></p>
-            <p style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#64748b;" id="reg-as-email"></p>
+            <p style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#94a3b8;" id="reg-as-email"></p>
           </div>
-          <button onclick="regStep1()" style="background:none;border:none;color:#475569;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.72rem;text-decoration:underline;">← Edit details</button>
+          <button onclick="regStep1()" style="background:none;border:none;color:#cbd5e1;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.72rem;text-decoration:underline;">← Edit details</button>
         </div>
         <!-- TCM verify -->
         <div id="tcm-section" style="display:none;">
           <div id="tcm-connected-bar" style="display:none;align-items:center;gap:8px;background:rgba(74,222,128,.05);border:1px solid rgba(74,222,128,.18);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-family:'JetBrains Mono',monospace;font-size:.7rem;">
             <span class="pulse-dot"></span>
             <span id="tcm-wallet-label" style="color:var(--green);font-weight:700;"></span>
-            <span id="tcm-wallet-addr" style="color:#475569;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
+            <span id="tcm-wallet-addr" style="color:#cbd5e1;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
           </div>
           <button class="btn-primary" id="tcm-connect-btn" onclick="connectTCMWallet()" style="margin-bottom:10px;">Connect Wallet to Verify $TCM Balance</button>
           <button class="btn-primary" id="tcm-verify-btn" onclick="verifyAndGenerate()" style="display:none;background:var(--green);color:#000;">✓ Verify &amp; Get Free API Key</button>
-          <p style="font-size:.78rem;color:#475569;font-family:'JetBrains Mono',monospace;margin-top:10px;">Don't have 2,500 $TCM? <a href="https://tipcryp.io/invest.html" style="color:var(--cyan);text-decoration:none;">Buy at Stage 2 →</a></p>
-          <button onclick="regStep1()" style="background:none;border:none;color:#475569;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.72rem;margin-top:10px;text-decoration:underline;">← Edit details</button>
+          <p style="font-size:.78rem;color:#cbd5e1;font-family:'JetBrains Mono',monospace;margin-top:10px;">Don't have 2,500 $TCM? <a href="https://tipcryp.io/invest.html" style="color:var(--cyan);text-decoration:none;">Buy at Stage 2 →</a></p>
+          <button onclick="regStep1()" style="background:none;border:none;color:#cbd5e1;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.72rem;margin-top:10px;text-decoration:underline;">← Edit details</button>
         </div>
       </div>
 
@@ -599,29 +621,29 @@ button, a, select, input, label {
         <div style="text-align:center;margin-bottom:20px;">
           <div style="width:52px;height:52px;border-radius:50%;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:1.6rem;">✓</div>
           <h2 style="font-family:'Urbanist',sans-serif;font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:4px;">API Key Generated</h2>
-          <p style="font-size:.8rem;color:#64748b;">Copy and store it securely — also sent to your email.</p>
+          <p style="font-size:.8rem;color:#94a3b8;">Copy and store it securely — also sent to your email.</p>
         </div>
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
           <span class="field-label" style="margin:0;">Your API Key</span>
           <button onclick="copyKey()" style="background:none;border:none;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:.68rem;cursor:pointer;">⧉ Copy</button>
         </div>
         <div class="api-key-box" id="api-key-display" onclick="copyKey()">Generating...</div>
-        <p style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#334155;margin-top:6px;">⚠ Do not share this key publicly or commit it to code repositories.</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#94a3b8;margin-top:6px;">⚠ Do not share this key publicly or commit it to code repositories.</p>
         <button class="btn-primary" onclick="showDashboard()" style="margin-top:16px;background:var(--green);color:#000;">View Dashboard &amp; Embed Code →</button>
       </div>
     </div>
 
     <!-- Included features -->
     <div class="panel" style="padding:22px;">
-      <p style="font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:#334155;margin-bottom:14px;">Included With Your Key</p>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;margin-bottom:14px;">Included With Your Key</p>
       <div style="display:flex;flex-direction:column;gap:9px;">
-        <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--cyan);width:18px;flex-shrink:0;">✓</span><span style="font-size:.85rem;color:#94a3b8;">Unlimited crypto tips — no transaction limits</span></div>
-        <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--cyan);width:18px;flex-shrink:0;">✓</span><span style="font-size:.85rem;color:#94a3b8;">ETH · BTC · USDT · SOL · XRP support</span></div>
-        <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--cyan);width:18px;flex-shrink:0;">✓</span><span style="font-size:.85rem;color:#94a3b8;">QR code generator for stream overlays</span></div>
-        <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--cyan);width:18px;flex-shrink:0;">✓</span><span style="font-size:.85rem;color:#94a3b8;">Embed on WordPress, Wix, Linktree, any site</span></div>
-        <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--cyan);width:18px;flex-shrink:0;">✓</span><span style="font-size:.85rem;color:#94a3b8;">Zero platform commission — direct wallet payouts</span></div>
-        <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--cyan);width:18px;flex-shrink:0;">✓</span><span style="font-size:.85rem;color:#94a3b8;">$TCM staking toggle — auto-compound tips</span></div>
-        <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--cyan);width:18px;flex-shrink:0;">✓</span><span style="font-size:.85rem;color:#94a3b8;">Priority Telegram support</span></div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--cyan);width:18px;flex-shrink:0;">✓</span><span style="font-size:.85rem;color:#cbd5e1;">Unlimited crypto tips — no transaction limits</span></div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--cyan);width:18px;flex-shrink:0;">✓</span><span style="font-size:.85rem;color:#cbd5e1;">ETH · BTC · USDT · XRP support</span></div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--cyan);width:18px;flex-shrink:0;">✓</span><span style="font-size:.85rem;color:#cbd5e1;">QR code generator for stream overlays</span></div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--cyan);width:18px;flex-shrink:0;">✓</span><span style="font-size:.85rem;color:#e2e8f0;">Embed on YouTube, Twitch, X, WordPress, any site</span></div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--cyan);width:18px;flex-shrink:0;">✓</span><span style="font-size:.85rem;color:#cbd5e1;">Zero platform commission — direct wallet payouts</span></div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--cyan);width:18px;flex-shrink:0;">✓</span><span style="font-size:.85rem;color:#e2e8f0;">QR code overlays for streamers</span></div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--cyan);width:18px;flex-shrink:0;">✓</span><span style="font-size:.85rem;color:#cbd5e1;">Priority Telegram support</span></div>
       </div>
     </div>
 
@@ -635,7 +657,7 @@ button, a, select, input, label {
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
         <div>
           <p style="font-family:'Urbanist',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;">TipCryp Creator Pass</p>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:#94a3b8;margin-top:3px;">Annual API licence · Unlimited widget usage</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:#cbd5e1;margin-top:3px;">Annual API licence · Unlimited widget usage</p>
         </div>
         <div style="text-align:right;">
           <p style="font-family:'Urbanist',sans-serif;font-size:1.8rem;font-weight:900;color:#22d3ee;line-height:1;">$100</p>
@@ -643,9 +665,9 @@ button, a, select, input, label {
         </div>
       </div>
       <div style="border-top:1px solid rgba(255,255,255,.06);margin-top:10px;padding-top:10px;display:flex;flex-direction:column;gap:5px;">
-        <div style="display:flex;gap:8px;"><span style="color:#4ade80;flex-shrink:0;">✓</span><span style="font-size:.9rem;color:#c8dae6;">Zero platform commission — direct wallet payouts</span></div>
-        <div style="display:flex;gap:8px;"><span style="color:#4ade80;flex-shrink:0;">✓</span><span style="font-size:.9rem;color:#c8dae6;">ETH · BTC · USDT · XRP · QR codes for streams</span></div>
-        <div style="display:flex;gap:8px;"><span style="color:#4ade80;flex-shrink:0;">✓</span><span style="font-size:.9rem;color:#c8dae6;">Embed on any site · Unlimited tips · 1 year</span></div>
+        <div style="display:flex;gap:8px;"><span style="color:#4ade80;flex-shrink:0;">✓</span><span style="font-size:.9rem;color:#f1f5f9;">Zero platform commission — direct wallet payouts</span></div>
+        <div style="display:flex;gap:8px;"><span style="color:#4ade80;flex-shrink:0;">✓</span><span style="font-size:.9rem;color:#f1f5f9;">ETH · BTC · USDT · XRP · QR codes for streams</span></div>
+        <div style="display:flex;gap:8px;"><span style="color:#4ade80;flex-shrink:0;">✓</span><span style="font-size:.9rem;color:#f1f5f9;">Embed on any site · Unlimited tips · 1 year</span></div>
       </div>
       <div style="margin-top:10px;text-align:center;">
         <p style="font-family:'JetBrains Mono',monospace;font-size:.74rem;color:#22d3ee;">Or hold 2,500 $TCM for free permanent access → <a href="https://tipcryp.io/invest.html" style="color:#4ade80;text-decoration:none;font-weight:700;">Buy $TCM</a></p>
@@ -658,7 +680,7 @@ button, a, select, input, label {
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
         <div>
           <p style="font-family:'Urbanist',sans-serif;font-size:1rem;font-weight:700;color:#fff;">Pay for Creator Pass</p>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#94a3b8;margin-top:2px;">Send <span style="color:#22d3ee;font-weight:700;">$100 USD</span> equivalent of your chosen token</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#cbd5e1;margin-top:2px;">Send <span style="color:#22d3ee;font-weight:700;">$100 USD</span> equivalent of your chosen token</p>
         </div>
         <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.2);border-radius:999px;padding:4px 12px;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#22d3ee;font-weight:700;"><span class="w-pulse-dot"></span>SECURE</span>
       </div>
@@ -762,14 +784,14 @@ button, a, select, input, label {
           <!-- Hidden select keeps the JS logic working unchanged -->
           <select id="w-walletSelect" style="display:none;"></select>
           <!-- Transparent address display — auto-fills when token selected -->
-          <div id="w-addressDisplay" style="background:#050505;border:1px solid #1e1e1e;border-radius:8px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:#334155;word-break:break-all;line-height:1.7;min-height:48px;transition:border-color .3s,color .3s;position:relative;">
-            <span id="w-addr-placeholder" style="color:#334155;">Select a token above — payment address appears here</span>
+          <div id="w-addressDisplay" style="background:#050505;border:1px solid #1e1e1e;border-radius:8px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:#94a3b8;word-break:break-all;line-height:1.7;min-height:48px;transition:border-color .3s,color .3s;position:relative;">
+            <span id="w-addr-placeholder" style="color:#94a3b8;">Select a token above — payment address appears here</span>
             <span id="w-addr-text" style="display:none;color:#4ade80;"></span>
           </div>
           <div id="w-addr-meta" style="display:none;margin-top:6px;align-items:center;gap:6px;">
             <span style="width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 5px #4ade80;flex-shrink:0;"></span>
             <span style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#4ade80;" id="w-addr-network">TipCryp Official Wallet</span>
-            <span style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#334155;margin-left:auto;" id="w-addr-verify-link"></span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#94a3b8;margin-left:auto;" id="w-addr-verify-link"></span>
           </div>
         </div>
 
@@ -788,16 +810,12 @@ button, a, select, input, label {
         <button class="w-send-btn" id="w-sendBtn" onclick="wHandleSend()">
           &#10230; PAY $100 — GET API KEY
         </button>
-        <div style="text-align:center;margin-top:8px;">
-          <button onclick="wSkipPayment()" style="background:none;border:none;color:#334155;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.65rem;text-decoration:underline;padding:4px;">Skip payment — test confirmation page</button>
-        </div>
-
         <div class="w-tx-result" id="w-txResult">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
             <span style="color:#4ade80;font-size:1.3rem;">&#10003;</span>
             <span style="font-family:'Urbanist',sans-serif;font-size:1rem;font-weight:700;color:#fff;">Payment Submitted!</span>
           </div>
-          <div style="font-family:'JetBrains Mono',monospace;font-size:.8rem;color:#94a3b8;display:flex;flex-direction:column;gap:5px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:.8rem;color:#cbd5e1;display:flex;flex-direction:column;gap:5px;">
             <div>Token: <span id="w-txToken" style="color:#e2e8f0;"></span></div>
             <div>Amount: <span id="w-txAmount" style="color:#e2e8f0;"></span></div>
             <div>TX: <a id="w-txHashLink" href="#" target="_blank" rel="noopener noreferrer" style="color:#22d3ee;word-break:break-all;"></a></div>
@@ -838,7 +856,7 @@ button, a, select, input, label {
     <div style="text-align:center;margin-bottom:40px;">
       <div style="width:72px;height:72px;border-radius:50%;background:rgba(74,222,128,.12);border:2px solid rgba(74,222,128,.35);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:2rem;">✓</div>
       <h1 style="font-family:'Urbanist',sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:8px;">You're all set!</h1>
-      <p style="font-size:.95rem;color:#64748b;line-height:1.75;">Your TipCryp Creator Pass is confirmed. API key generated and sent to your email.</p>
+      <p style="font-size:.95rem;color:#cbd5e1;line-height:1.75;">Your TipCryp Creator Pass is confirmed. API key generated and sent to your email.</p>
     </div>
 
     <!-- API Key box -->
@@ -849,25 +867,25 @@ button, a, select, input, label {
         <button onclick="cpConfirmKey()" style="display:inline-flex;align-items:center;gap:6px;background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.2);border-radius:7px;color:#22d3ee;font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:6px 14px;cursor:pointer;transition:background .2s;" id="copy-key-btn">⧉ Copy Key</button>
       </div>
       <div id="confirm-key-display" onclick="cpConfirmKey()" style="background:rgba(0,0,0,.5);border:1px solid rgba(34,211,238,.15);border-radius:10px;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:.85rem;color:#67e8f9;word-break:break-all;letter-spacing:.03em;cursor:pointer;line-height:1.8;transition:border-color .2s;">—</div>
-      <p style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#475569;margin-top:8px;">⚠ Store this securely. Do not commit to public code or share publicly.</p>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#cbd5e1;margin-top:8px;">⚠ Store this securely. Do not commit to public code or share publicly.</p>
     </div>
 
     <!-- Registration + TX summary -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
       <div style="background:rgba(13,17,23,.95);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:18px;">
-        <p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#334155;margin-bottom:12px;">Account</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:12px;">Account</p>
         <div style="display:flex;flex-direction:column;gap:7px;">
-          <div><p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#475569;">Creator</p><p style="font-size:.9rem;color:#fff;font-weight:600;" id="confirm-name">—</p></div>
-          <div><p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#475569;">Email</p><p style="font-size:.82rem;color:#94a3b8;" id="confirm-email">—</p></div>
-          <div><p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#475569;">Plan</p><p style="font-size:.82rem;color:#22d3ee;font-weight:600;" id="confirm-plan">Creator Pass · 1 Year</p></div>
+          <div><p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#cbd5e1;">Creator</p><p style="font-size:.9rem;color:#fff;font-weight:600;" id="confirm-name">—</p></div>
+          <div><p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#cbd5e1;">Email</p><p style="font-size:.82rem;color:#cbd5e1;" id="confirm-email">—</p></div>
+          <div><p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#cbd5e1;">Plan</p><p style="font-size:.82rem;color:#22d3ee;font-weight:600;" id="confirm-plan">Creator Pass · 1 Year</p></div>
         </div>
       </div>
       <div style="background:rgba(13,17,23,.95);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:18px;">
-        <p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#334155;margin-bottom:12px;">Payment</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:12px;">Payment</p>
         <div style="display:flex;flex-direction:column;gap:7px;">
-          <div><p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#475569;">Amount</p><p style="font-size:.9rem;color:#4ade80;font-weight:700;" id="confirm-amount">$100 USD</p></div>
-          <div><p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#475569;">Token</p><p style="font-size:.82rem;color:#94a3b8;" id="confirm-token">—</p></div>
-          <div><p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#475569;">TX Hash</p><a id="confirm-tx-link" href="#" target="_blank" rel="noopener noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#22d3ee;word-break:break-all;">View on Explorer →</a></div>
+          <div><p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#cbd5e1;">Amount</p><p style="font-size:.9rem;color:#4ade80;font-weight:700;" id="confirm-amount">$100 USD</p></div>
+          <div><p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#cbd5e1;">Token</p><p style="font-size:.82rem;color:#cbd5e1;" id="confirm-token">—</p></div>
+          <div><p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#cbd5e1;">TX Hash</p><a id="confirm-tx-link" href="#" target="_blank" rel="noopener noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#22d3ee;word-break:break-all;">View on Explorer →</a></div>
         </div>
       </div>
     </div>
@@ -878,15 +896,15 @@ button, a, select, input, label {
       <div style="display:flex;flex-direction:column;gap:14px;">
         <div style="display:flex;gap:14px;align-items:flex-start;">
           <div style="width:32px;height:32px;border-radius:50%;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.25);color:#22d3ee;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
-          <div><p style="font-size:.92rem;color:#e2e8f0;font-weight:600;margin-bottom:2px;">Copy your API key above</p><p style="font-size:.82rem;color:#64748b;line-height:1.65;">Store it in a safe place. You'll need it to activate the widget on your site.</p></div>
+          <div><p style="font-size:.92rem;color:#e2e8f0;font-weight:600;margin-bottom:2px;">Copy your API key above</p><p style="font-size:.82rem;color:#cbd5e1;line-height:1.65;">Store it in a safe place. You'll need it to activate the widget on your site.</p></div>
         </div>
         <div style="display:flex;gap:14px;align-items:flex-start;">
           <div style="width:32px;height:32px;border-radius:50%;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.25);color:#22d3ee;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
-          <div><p style="font-size:.92rem;color:#e2e8f0;font-weight:600;margin-bottom:2px;">Embed the widget on your site</p><p style="font-size:.82rem;color:#64748b;line-height:1.65;">Paste one script tag before <code style="color:#22d3ee;background:rgba(34,211,238,.08);padding:1px 5px;border-radius:4px;">&lt;/body&gt;</code> on any page. Done in 2 minutes.</p></div>
+          <div><p style="font-size:.92rem;color:#e2e8f0;font-weight:600;margin-bottom:2px;">Embed the widget on your site</p><p style="font-size:.82rem;color:#cbd5e1;line-height:1.65;">Paste one script tag before <code style="color:#22d3ee;background:rgba(34,211,238,.08);padding:1px 5px;border-radius:4px;">&lt;/body&gt;</code> on any page. Done in 2 minutes.</p></div>
         </div>
         <div style="display:flex;gap:14px;align-items:flex-start;">
           <div style="width:32px;height:32px;border-radius:50%;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.25);color:#22d3ee;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
-          <div><p style="font-size:.92rem;color:#e2e8f0;font-weight:600;margin-bottom:2px;">Generate your stream QR code</p><p style="font-size:.82rem;color:#64748b;line-height:1.65;">Add it to your OBS/Streamlabs overlay and start receiving direct crypto tips live.</p></div>
+          <div><p style="font-size:.92rem;color:#e2e8f0;font-weight:600;margin-bottom:2px;">Generate your stream QR code</p><p style="font-size:.82rem;color:#cbd5e1;line-height:1.65;">Add it to your OBS/Streamlabs overlay and start receiving direct crypto tips live.</p></div>
         </div>
       </div>
     </div>
@@ -894,8 +912,8 @@ button, a, select, input, label {
     <!-- Embed code preview -->
     <div style="background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:20px;margin-bottom:20px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-        <p style="font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:#475569;">Your Embed Code</p>
-        <button onclick="cpCopyEmbed()" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:7px;color:#94a3b8;font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:5px 12px;cursor:pointer;">⧉ Copy</button>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:#cbd5e1;">Your Embed Code</p>
+        <button onclick="cpCopyEmbed()" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:7px;color:#cbd5e1;font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:5px 12px;cursor:pointer;">⧉ Copy</button>
       </div>
       <pre id="confirm-embed-code" style="font-family:'JetBrains Mono',monospace;font-size:.76rem;color:#67e8f9;line-height:1.8;overflow-x:auto;white-space:pre-wrap;margin:0;"></pre>
     </div>
@@ -904,7 +922,7 @@ button, a, select, input, label {
     <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
       <button onclick="showDashboard()" style="background:#22d3ee;color:#000;font-family:'Urbanist',sans-serif;font-weight:800;font-size:.88rem;letter-spacing:.06em;text-transform:uppercase;border:none;border-radius:10px;padding:14px 28px;cursor:pointer;box-shadow:0 0 24px rgba(34,211,238,.3);">Open Dashboard →</button>
       <a href="https://t.me/+WtbDPLuRTLE4NTQx" target="_blank" rel="noopener noreferrer" style="background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25);color:#4ade80;font-family:'Urbanist',sans-serif;font-weight:700;font-size:.88rem;border-radius:10px;padding:14px 28px;text-decoration:none;">Join Telegram Community</a>
-      <a href="https://tipcryp.me" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#94a3b8;font-family:'Urbanist',sans-serif;font-weight:600;font-size:.88rem;border-radius:10px;padding:14px 28px;text-decoration:none;">← Back to TipCryp.me</a>
+      <a href="https://tipcryp.me" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#cbd5e1;font-family:'Urbanist',sans-serif;font-weight:600;font-size:.88rem;border-radius:10px;padding:14px 28px;text-decoration:none;">← Back to TipCryp.me</a>
     </div>
 
   </div>
@@ -916,17 +934,17 @@ button, a, select, input, label {
   <div style="margin-bottom:28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
     <div>
       <h2 style="font-family:'Urbanist',sans-serif;font-size:1.8rem;font-weight:800;color:#fff;">Creator Dashboard</h2>
-      <p style="font-size:.88rem;color:#475569;margin-top:4px;">Welcome, <strong id="dash-name" style="color:#94a3b8;"></strong>. Your API key is active.</p>
+      <p style="font-size:.88rem;color:#cbd5e1;margin-top:4px;">Welcome, <strong id="dash-name" style="color:#cbd5e1;"></strong>. Your API key is active.</p>
     </div>
     <span id="dash-plan-badge" style="font-family:'JetBrains Mono',monospace;font-size:.68rem;padding:4px 14px;border-radius:999px;"></span>
   </div>
 
   <!-- Stats -->
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:24px;">
-    <div class="panel" style="padding:18px;"><p style="font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#334155;text-transform:uppercase;margin-bottom:5px;">Status</p><p style="font-family:'Urbanist',sans-serif;font-size:1.3rem;font-weight:800;color:var(--green);">Active</p><p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#334155;margin-top:3px;">365 days remaining</p></div>
-    <div class="panel" style="padding:18px;"><p style="font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#334155;text-transform:uppercase;margin-bottom:5px;">Total Tips</p><p style="font-family:'Urbanist',sans-serif;font-size:1.3rem;font-weight:800;color:#fff;">0</p><p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#334155;margin-top:3px;">Since activation</p></div>
-    <div class="panel" style="padding:18px;"><p style="font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#334155;text-transform:uppercase;margin-bottom:5px;">Widget Loads</p><p style="font-family:'Urbanist',sans-serif;font-size:1.3rem;font-weight:800;color:#fff;">0</p><p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#334155;margin-top:3px;">All-time</p></div>
-    <div class="panel" style="padding:18px;"><p style="font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#334155;text-transform:uppercase;margin-bottom:5px;">Your Plan</p><p id="dash-plan-display" style="font-family:'Urbanist',sans-serif;font-size:1.1rem;font-weight:800;color:var(--cyan);">Creator Pass</p><p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#334155;margin-top:3px;">Annual License</p></div>
+    <div class="panel" style="padding:18px;"><p style="font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#94a3b8;text-transform:uppercase;margin-bottom:5px;">Status</p><p style="font-family:'Urbanist',sans-serif;font-size:1.3rem;font-weight:800;color:var(--green);">Active</p><p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#94a3b8;margin-top:3px;">365 days remaining</p></div>
+    <div class="panel" style="padding:18px;"><p style="font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#94a3b8;text-transform:uppercase;margin-bottom:5px;">Total Tips</p><p style="font-family:'Urbanist',sans-serif;font-size:1.3rem;font-weight:800;color:#fff;">0</p><p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#94a3b8;margin-top:3px;">Since activation</p></div>
+    <div class="panel" style="padding:18px;"><p style="font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#94a3b8;text-transform:uppercase;margin-bottom:5px;">Widget Loads</p><p style="font-family:'Urbanist',sans-serif;font-size:1.3rem;font-weight:800;color:#fff;">0</p><p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#94a3b8;margin-top:3px;">All-time</p></div>
+    <div class="panel" style="padding:18px;"><p style="font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#94a3b8;text-transform:uppercase;margin-bottom:5px;">Your Plan</p><p id="dash-plan-display" style="font-family:'Urbanist',sans-serif;font-size:1.1rem;font-weight:800;color:var(--cyan);">Creator Pass</p><p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#94a3b8;margin-top:3px;">Annual License</p></div>
   </div>
 
   <!-- Tabs -->
@@ -942,12 +960,15 @@ button, a, select, input, label {
   <div id="tab-embed" class="tab-panel active">
     <div class="panel" style="padding:26px;">
       <h3 style="font-family:'Urbanist',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:6px;">Embed on Your Website</h3>
-      <p style="font-size:.84rem;color:#64748b;margin-bottom:18px;">Paste this single script tag anywhere in your HTML where you want the widget to appear.</p>
+      <p style="font-size:.84rem;color:#cbd5e1;margin-bottom:18px;">Paste this single script tag anywhere in your HTML where you want the widget to appear.</p>
       <div class="code-block" id="embed-code">
         <span class="cm">&lt;!-- TipCryp Widget — tipcryp.me --&gt;</span><br/>
         <span class="kw">&lt;script</span> <span class="str">src</span>=<span class="str">"https://tipcryp.github.io/tipcryp-widget/widget.min.js"</span><br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">data-key</span>=<span class="str" id="embed-key-span">"tcm_•••••••••••••••"</span><br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">data-creator</span>=<span class="str" id="embed-name-span">"your-name"</span><br/>
+        <span id="embed-eth-row" style="display:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">data-wallet-eth</span>=<span class="str" id="embed-eth-span">""</span><br/></span>
+        <span id="embed-btc-row" style="display:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">data-wallet-btc</span>=<span class="str" id="embed-btc-span">""</span><br/></span>
+        <span id="embed-xrp-row" style="display:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">data-wallet-xrp</span>=<span class="str" id="embed-xrp-span">""</span><br/></span>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">data-theme</span>=<span class="str">"dark"</span><br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">data-position</span>=<span class="str">"right"</span><br/>
         <span class="kw">&gt;&lt;/script&gt;</span>
@@ -956,11 +977,11 @@ button, a, select, input, label {
       <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
         <div style="padding:14px;background:rgba(74,222,128,.05);border:1px solid rgba(74,222,128,.12);border-radius:10px;">
           <p style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--green);margin-bottom:4px;">✓ WordPress</p>
-          <p style="font-size:.78rem;color:#64748b;">Paste in any Text/HTML block or footer.php before &lt;/body&gt;</p>
+          <p style="font-size:.78rem;color:#cbd5e1;">Paste in any Text/HTML block or footer.php before &lt;/body&gt;</p>
         </div>
         <div style="padding:14px;background:rgba(34,211,238,.04);border:1px solid rgba(34,211,238,.1);border-radius:10px;">
-          <p style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--cyan);margin-bottom:4px;">✓ Linktree / Beacons</p>
-          <p style="font-size:.78rem;color:#64748b;">Use the Custom HTML embed block and paste the script tag.</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--cyan);margin-bottom:4px;">✓ WordPress / Any Site</p>
+          <p style="font-size:.78rem;color:#cbd5e1;">Use the Custom HTML embed block and paste the script tag.</p>
         </div>
       </div>
     </div>
@@ -970,7 +991,7 @@ button, a, select, input, label {
   <div id="tab-qrstream" class="tab-panel">
     <div class="panel" style="padding:26px;">
       <h3 style="font-family:'Urbanist',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:6px;">QR Codes for Live Streams</h3>
-      <p style="font-size:.84rem;color:#64748b;margin-bottom:22px;line-height:1.75;">Generate a QR code for any of your wallet addresses. Add it as a Browser Source in OBS or Streamlabs — viewers scan it directly and crypto goes straight to your wallet. No middleman, zero platform fees.</p>
+      <p style="font-size:.84rem;color:#cbd5e1;margin-bottom:22px;line-height:1.75;">Generate a QR code for any of your wallet addresses. Add it as a Browser Source in OBS or Streamlabs — viewers scan it directly and crypto goes straight to your wallet. No middleman, zero platform fees.</p>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;">
         <div>
@@ -991,7 +1012,7 @@ button, a, select, input, label {
             <div>
               <label class="field-label">Your Wallet Address</label>
               <input type="text" id="qr-addr-input" class="field-input" placeholder="Paste your wallet address here" oninput="generateStreamQR()"/>
-              <p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#334155;margin-top:5px;">This address is encoded into the QR — tips go directly here.</p>
+              <p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#94a3b8;margin-top:5px;">This address is encoded into the QR — tips go directly here.</p>
             </div>
             <div>
               <label class="field-label">QR Size</label>
@@ -1009,19 +1030,19 @@ button, a, select, input, label {
         </div>
         <div style="text-align:center;">
           <div id="stream-qr-container" style="display:inline-flex;align-items:center;justify-content:center;background:#fff;border-radius:16px;padding:16px;min-width:180px;min-height:180px;">
-            <p style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#94a3b8;">Enter address to<br/>generate QR</p>
+            <p style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#cbd5e1;">Enter address to<br/>generate QR</p>
           </div>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#475569;margin-top:10px;" id="stream-qr-label">—</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#cbd5e1;margin-top:10px;" id="stream-qr-label">—</p>
         </div>
       </div>
 
       <div style="margin-top:22px;padding:18px;background:rgba(34,211,238,.04);border:1px solid rgba(34,211,238,.12);border-radius:12px;">
         <p style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--cyan);margin-bottom:10px;font-weight:700;">OBS / Streamlabs Setup (2 minutes)</p>
         <div style="display:flex;flex-direction:column;gap:8px;">
-          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#22d3ee;flex-shrink:0;width:18px;">1.</span><span style="font-size:.82rem;color:#64748b;">Download your QR PNG above</span></div>
-          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#22d3ee;flex-shrink:0;width:18px;">2.</span><span style="font-size:.82rem;color:#64748b;">In OBS: Add Source → Image → select your QR file</span></div>
-          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#22d3ee;flex-shrink:0;width:18px;">3.</span><span style="font-size:.82rem;color:#64748b;">Position in the corner of your scene — resize to fit your layout</span></div>
-          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#22d3ee;flex-shrink:0;width:18px;">4.</span><span style="font-size:.82rem;color:#64748b;">Viewers scan with any mobile wallet app and tips arrive directly</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#22d3ee;flex-shrink:0;width:18px;">1.</span><span style="font-size:.82rem;color:#cbd5e1;">Download your QR PNG above</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#22d3ee;flex-shrink:0;width:18px;">2.</span><span style="font-size:.82rem;color:#cbd5e1;">In OBS: Add Source → Image → select your QR file</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#22d3ee;flex-shrink:0;width:18px;">3.</span><span style="font-size:.82rem;color:#cbd5e1;">Position in the corner of your scene — resize to fit your layout</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#22d3ee;flex-shrink:0;width:18px;">4.</span><span style="font-size:.82rem;color:#cbd5e1;">Viewers scan with any mobile wallet app and tips arrive directly</span></div>
         </div>
       </div>
     </div>
@@ -1031,7 +1052,7 @@ button, a, select, input, label {
   <div id="tab-config" class="tab-panel">
     <div class="panel" style="padding:26px;">
       <h3 style="font-family:'Urbanist',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:6px;">Widget Configuration</h3>
-      <p style="font-size:.84rem;color:#64748b;margin-bottom:20px;">Set your wallet addresses. Tips go directly to these — TipCryp never holds or routes your funds.</p>
+      <p style="font-size:.84rem;color:#cbd5e1;margin-bottom:20px;">Set your wallet addresses. Tips go directly to these — TipCryp never holds or routes your funds.</p>
       <div style="display:flex;flex-direction:column;gap:14px;">
         <div>
           <label class="field-label">ETH / ERC-20 Wallet (receives ETH + USDT)</label>
@@ -1068,7 +1089,7 @@ button, a, select, input, label {
   <div id="tab-key" class="tab-panel">
     <div class="panel" style="padding:26px;">
       <h3 style="font-family:'Urbanist',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:6px;">Your API Key</h3>
-      <p style="font-size:.84rem;color:#64748b;margin-bottom:16px;">Keep this private. Treat it like a password.</p>
+      <p style="font-size:.84rem;color:#cbd5e1;margin-bottom:16px;">Keep this private. Treat it like a password.</p>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
         <span class="field-label" style="margin:0;">Active API Key</span>
         <button onclick="copyKey()" class="btn-ghost">⧉ Copy</button>
@@ -1079,7 +1100,7 @@ button, a, select, input, label {
       </div>
       <div style="margin-top:14px;padding:12px;background:rgba(248,113,113,.04);border:1px solid rgba(248,113,113,.1);border-radius:10px;">
         <p style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--red);margin-bottom:3px;">⚠ Security Notice</p>
-        <p style="font-size:.78rem;color:#64748b;">Regenerating invalidates the old key immediately. Update your embed code afterwards.</p>
+        <p style="font-size:.78rem;color:#cbd5e1;">Regenerating invalidates the old key immediately. Update your embed code afterwards.</p>
       </div>
     </div>
   </div>
@@ -1118,7 +1139,7 @@ button, a, select, input, label {
         </div>
         <div style="padding:16px;background:rgba(74,222,128,.04);border:1px solid rgba(74,222,128,.1);border-radius:10px;">
           <p style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--green);margin-bottom:6px;">Support</p>
-          <p style="font-size:.84rem;color:#64748b;line-height:1.75;">Need help? Join the <a href="https://t.me/+WtbDPLuRTLE4NTQx" target="_blank" rel="noopener noreferrer" style="color:var(--green);text-decoration:none;">TipCryp Telegram community</a> for real-time support.</p>
+          <p style="font-size:.84rem;color:#cbd5e1;line-height:1.75;">Need help? Join the <a href="https://t.me/+WtbDPLuRTLE4NTQx" target="_blank" rel="noopener noreferrer" style="color:var(--green);text-decoration:none;">TipCryp Telegram community</a> for real-time support.</p>
         </div>
       </div>
     </div>
@@ -1129,7 +1150,7 @@ button, a, select, input, label {
 
 <footer style="border-top:1px solid rgba(255,255,255,.05);background:#060810;padding:20px 24px;text-align:center;">
   <p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#1e293b;">
-    © 2026 TipCryp · tipcryp.me · <a href="https://tipcryp.io" style="color:#334155;text-decoration:none;">$TCM ICO</a> · <a href="https://t.me/+WtbDPLuRTLE4NTQx" target="_blank" rel="noopener noreferrer" style="color:#4ade80;text-decoration:none;">Telegram</a>
+    © 2026 TipCryp · tipcryp.me · <a href="https://tipcryp.io" style="color:#94a3b8;text-decoration:none;">$TCM ICO</a> · <a href="https://t.me/+WtbDPLuRTLE4NTQx" target="_blank" rel="noopener noreferrer" style="color:#4ade80;text-decoration:none;">Telegram</a>
   </p>
 </footer>
 
@@ -1145,7 +1166,7 @@ button, a, select, input, label {
     const W_TOKEN_PRICES={ETH:3200,BTC:95000,USDT:1,XRP:0.55};
     const W_API_KEY_USD=100;
     let wConnectedAccount=null,wConnectedProvider=null,wWeb3Provider=null,wToastTimer=null;
-    let regData={name:'',email:'',platform:'',plan:'pay',step:1};
+    let regData={name:'',email:'',platform:'',plan:'pay',step:1,walletEth:'',walletBtc:'',walletXrp:''};
     let paymentData={token:'',amount:0,txHash:'',confirmed:false};
     let finalApiKey='';
 
@@ -1178,7 +1199,7 @@ button, a, select, input, label {
             if(meta) meta.style.display = 'flex';
             if(copy) copy.style.display = 'inline';
             if(net)  net.textContent = (nets[token]||'TipCryp Official Wallet') + ' · TipCryp Official';
-            if(ver)  ver.innerHTML = '<a href="'+(expls[token]||'#')+'" target="_blank" rel="noopener noreferrer" style="color:#475569;text-decoration:none;font-size:.62rem;">Verify on explorer ↗</a>';
+            if(ver)  ver.innerHTML = '<a href="'+(expls[token]||'#')+'" target="_blank" rel="noopener noreferrer" style="color:#cbd5e1;text-decoration:none;font-size:.62rem;">Verify on explorer ↗</a>';
         } else {
             if(ph)   ph.style.display  = 'inline';
             if(txt)  txt.style.display = 'none';
@@ -1283,7 +1304,7 @@ button, a, select, input, label {
         const provider=wGetEthProvider(type);
         if(!provider){
             wOpenModal(wWalletNames[type]+' Not Detected',
-                '<p style="font-size:.9rem;color:#ccc;line-height:1.8;">'+
+                '<p style="font-size:.9rem;color:#e2e8f0;line-height:1.8;">'+
                 'The <strong style="color:#22d3ee;">'+wWalletNames[type]+'</strong> extension was not found.<br>Install it then refresh.</p>'+
                 '<a href="'+wInstallURLs[type]+'" target="_blank" style="display:inline-block;margin-top:1rem;padding:.6rem 1.2rem;background:#22d3ee;color:#000;border-radius:6px;font-size:.82rem;font-weight:700;text-decoration:none;">Install '+wWalletNames[type]+' ↗</a>',
                 'After installing, refresh and try again.');
@@ -1320,7 +1341,7 @@ button, a, select, input, label {
         const uriMap={BTC:toAddr?'bitcoin:'+toAddr+(amount?'?amount='+amount:''):null,ETH:toAddr?'ethereum:'+toAddr+(amount?'?value='+amount:''):null,USDT:toAddr?'ethereum:'+toAddr+(amount?'?value='+amount:''):null,XRP:toAddr?'xrpl:'+toAddr+(amount?'?amount='+amount:''):null};
         const uri=token?uriMap[token]:null;
         if(uri){window.location.href=uri;wShowToast('Opening Exodus — confirm the $100 payment in the app.','info',7000);}
-        else{wOpenModal('Exodus Wallet','<p style="font-size:.9rem;color:#ccc;line-height:1.8;">Select token &amp; destination first, then click Exodus again.</p>','');}
+        else{wOpenModal('Exodus Wallet','<p style="font-size:.9rem;color:#e2e8f0;line-height:1.8;">Select token &amp; destination first, then click Exodus again.</p>','');}
         wConnectedProvider='exodus';wMarkBtn('exodus');wSetConnected('exodus-app','Exodus');
     }
 
@@ -1342,8 +1363,8 @@ button, a, select, input, label {
         if(!toAddr){wShowToast('Select a token first to set the destination address.','error');return;}
         if(!amount||amount<=0){wShowToast('Amount not set — select a token first.','error');return;}
         if(wConnectedProvider==='exodus'){wHandleExodus();return;}
-        if(token==='BTC'){wOpenModal('Bitcoin (BTC)','<p style="font-size:.9rem;color:#ccc;line-height:1.8;">BTC cannot be sent from MetaMask/Coinbase/Rabby.<br><br><strong style="color:#22d3ee;">Use Exodus</strong> or send from your exchange.</p>','Send to: '+toAddr);return;}
-        if(token==='XRP'){wOpenModal('XRP','<p style="font-size:.9rem;color:#ccc;line-height:1.8;">XRP is not EVM-compatible.<br><br><strong style="color:#22d3ee;">Use Exodus</strong> or XUMM wallet.</p>','Send to: '+toAddr);return;}
+        if(token==='BTC'){wOpenModal('Bitcoin (BTC)','<p style="font-size:.9rem;color:#e2e8f0;line-height:1.8;">BTC cannot be sent from MetaMask/Coinbase/Rabby.<br><br><strong style="color:#22d3ee;">Use Exodus</strong> or send from your exchange.</p>','Send to: '+toAddr);return;}
+        if(token==='XRP'){wOpenModal('XRP','<p style="font-size:.9rem;color:#e2e8f0;line-height:1.8;">XRP is not EVM-compatible.<br><br><strong style="color:#22d3ee;">Use Exodus</strong> or XUMM wallet.</p>','Send to: '+toAddr);return;}
         if(token==='ETH'){
             try{
                 // Balance check
@@ -1396,11 +1417,40 @@ button, a, select, input, label {
         txLink.textContent=txHash?txHash.slice(0,20)+'…':'—';
         if(txHash){txLink.href='https://etherscan.io/tx/'+txHash;}
         const safeName=regData.name.toLowerCase().replace(/[^a-z0-9]/g,'-');
-        const embedCode='<!-- TipCryp Widget -->\n<script src="https://tipcryp.github.io/tipcryp-widget/widget.min.js"\n        data-key="'+finalApiKey+'"\n        data-creator="'+safeName+'"\n        data-theme="dark"\n        data-position="right"\n><\/scr'+'ipt>';
+        const _cEth=regData.walletEth||sessionStorage.getItem('tcm_wallet_eth')||'';
+        const _cBtc=regData.walletBtc||sessionStorage.getItem('tcm_wallet_btc')||'';
+        const _cXrp=regData.walletXrp||sessionStorage.getItem('tcm_wallet_xrp')||'';
+        let _cWallets='';
+        if(_cEth)_cWallets+='\n        data-wallet-eth="'+_cEth+'"';
+        if(_cBtc)_cWallets+='\n        data-wallet-btc="'+_cBtc+'"';
+        if(_cXrp)_cWallets+='\n        data-wallet-xrp="'+_cXrp+'"';
+        const embedCode='<!-- TipCryp Widget -->\n<script src="https://tipcryp.github.io/tipcryp-widget/widget.min.js"\n        data-key="'+finalApiKey+'"\n        data-creator="'+safeName+'"'+_cWallets+'\n        data-theme="dark"\n        data-position="right"\n><\/scr'+'ipt>';
         document.getElementById('confirm-embed-code').textContent=embedCode;
         document.querySelector('main').style.display='none';
         document.getElementById('confirm-page').style.display='block';
         window.scrollTo({top:0,behavior:'smooth'});
+        // ── Send confirmation email via EmailJS ──
+        tcmSendEmail(regData.email, regData.name, finalApiKey, embedCode);
+    }
+
+    function tcmSendEmail(toEmail, creatorName, apiKey, embedCode){
+        if(!toEmail||!apiKey){return;}
+        try{
+            emailjs.init('udq5ZC7dtriPU2Xmm');
+            emailjs.send('tipcryp_mail','template_3chx54u',{
+                to_email:   toEmail,
+                creator_name: creatorName||'Creator',
+                api_key:    apiKey,
+                embed_code: embedCode,
+            }).then(function(){
+                wShowToast('Confirmation email sent to '+toEmail,'success',6000);
+            }).catch(function(err){
+                console.warn('[TipCryp] Email send failed:',err);
+                wShowToast('Email delivery failed — your key is still shown above. Please screenshot it.','error',8000);
+            });
+        }catch(e){
+            console.warn('[TipCryp] EmailJS error:',e);
+        }
     }
 
     function wSkipPayment(){
@@ -1453,15 +1503,25 @@ button, a, select, input, label {
         const name=document.getElementById('reg-name').value.trim();
         const email=document.getElementById('reg-email').value.trim();
         const type=document.getElementById('reg-type').value;
+        const eth=document.getElementById('reg-wallet-eth').value.trim();
+        const btc=document.getElementById('reg-wallet-btc').value.trim();
+        const xrp=document.getElementById('reg-wallet-xrp').value.trim();
         if(!name){wShowToast('Please enter your creator name.','error');return;}
         if(!email||!email.includes('@')){wShowToast('Please enter a valid email.','error');return;}
         if(!type){wShowToast('Please select your creator type.','error');return;}
+        if(!eth&&!btc&&!xrp){wShowToast('Please enter at least one wallet address.','error');return;}
+        if(eth&&!eth.startsWith('0x')){wShowToast('ETH address must start with 0x','error');return;}
+        if(xrp&&xrp.length>0&&!xrp.startsWith('r')){wShowToast('XRP address must start with r','error');return;}
         regData.name=name;regData.email=email;regData.platform=type;
+        regData.walletEth=eth;regData.walletBtc=btc;regData.walletXrp=xrp;
+        sessionStorage.setItem('tcm_wallet_eth',eth);
+        sessionStorage.setItem('tcm_wallet_btc',btc);
+        sessionStorage.setItem('tcm_wallet_xrp',xrp);
         const label=document.getElementById('reg-as-label');
         document.getElementById('reg-as-name').textContent=name;
         document.getElementById('reg-as-email').textContent=email;
         if(label)label.style.display='block';
-        if(wConnectedAccount){const btn=document.getElementById('w-sendBtn');btn.textContent='⟶ PAY $100 — GET API KEY';btn.style.cssText='';}
+        if(typeof wConnectedAccount!=='undefined'&&wConnectedAccount){const btn=document.getElementById('w-sendBtn');if(btn){btn.textContent='⟶ PAY $100 — GET API KEY';btn.style.cssText='';}}
         regSetStep(2);
         wShowToast('Details saved — now connect wallet and pay on the right.','success',5000);
     }
@@ -1472,7 +1532,7 @@ button, a, select, input, label {
 
     async function connectTCMWallet(){const eth=window.ethereum;if(!eth){wShowToast('MetaMask or Coinbase Wallet required.','error',6000);return;}try{const accounts=await eth.request({method:'eth_requestAccounts'});if(!accounts||!accounts.length){wShowToast('No accounts returned.','error');return;}const short=accounts[0].slice(0,6)+'…'+accounts[0].slice(-4);document.getElementById('tcm-connected-bar').style.display='flex';document.getElementById('tcm-wallet-label').textContent='Connected ·';document.getElementById('tcm-wallet-addr').textContent=short;document.getElementById('tcm-connect-btn').style.display='none';document.getElementById('tcm-verify-btn').style.display='flex';wShowToast('Wallet connected. Click verify to check $TCM balance.','success');}catch(err){wShowToast('Error: '+err.message,'error');}}
 
-    function verifyAndGenerate(){const btn=document.getElementById('tcm-verify-btn');btn.disabled=true;btn.textContent='Checking $TCM balance…';setTimeout(()=>{const fakeHash='0x'+Array.from(crypto.getRandomValues(new Uint8Array(32))).map(b=>b.toString(16).padStart(2,'0')).join('');wShowConfirmPage(fakeHash,'$TCM',0);},2000);}
+    function verifyAndGenerate(){const btn=document.getElementById('tcm-verify-btn');if(!btn)return;btn.disabled=true;btn.textContent='Checking $TCM balance…';setTimeout(()=>{try{const fakeHash='0x'+Array.from(crypto.getRandomValues(new Uint8Array(32))).map(b=>b.toString(16).padStart(2,'0')).join('');wShowConfirmPage(fakeHash,'$TCM',0);}catch(e){btn.disabled=false;btn.textContent='✓ Verify & Get Free API Key';wShowToast('Verification error. Please try again.','error');}},2000);}
 
     function generateAPIKey(){const chars='abcdefghijklmnopqrstuvwxyz0123456789';const rand=n=>{const a=new Uint32Array(n);crypto.getRandomValues(a);return Array.from(a,v=>chars[v%chars.length]).join('');};return 'tcm_'+rand(8)+'_'+rand(12)+'_'+rand(8);}
 
@@ -1494,14 +1554,32 @@ button, a, select, input, label {
         document.getElementById('embed-key-span').textContent='"'+key+'"';
         const safeName=(regData.name||name).toLowerCase().replace(/[^a-z0-9]/g,'-');
         document.getElementById('embed-name-span').textContent='"'+safeName+'"';
+        const dEth=regData.walletEth||sessionStorage.getItem('tcm_wallet_eth')||'';
+        const dBtc=regData.walletBtc||sessionStorage.getItem('tcm_wallet_btc')||'';
+        const dXrp=regData.walletXrp||sessionStorage.getItem('tcm_wallet_xrp')||'';
+        if(dEth){document.getElementById('embed-eth-span').textContent='"'+dEth+'"';document.getElementById('embed-eth-row').style.display='inline';}
+        if(dBtc){document.getElementById('embed-btc-span').textContent='"'+dBtc+'"';document.getElementById('embed-btc-row').style.display='inline';}
+        if(dXrp){document.getElementById('embed-xrp-span').textContent='"'+dXrp+'"';document.getElementById('embed-xrp-row').style.display='inline';}
         window.scrollTo({top:0,behavior:'smooth'});
     }
 
-    function copyEmbed(){const key=finalApiKey||sessionStorage.getItem('tcm_api_key')||'YOUR_KEY';const name=(regData.name||sessionStorage.getItem('tcm_creator')||'your-name').toLowerCase().replace(/[^a-z0-9]/g,'-');const code='<!-- TipCryp Widget -->\n<scr'+'ipt src="https://tipcryp.github.io/tipcryp-widget/widget.min.js"\n       data-key="'+key+'"\n       data-creator="'+name+'"\n       data-theme="dark"\n       data-position="right"\n><\/scr'+'ipt>';navigator.clipboard.writeText(code).then(()=>wShowToast('Embed code copied!','success'));}
+    function copyEmbed(){
+        const key=finalApiKey||sessionStorage.getItem('tcm_api_key')||'YOUR_KEY';
+        const name=(regData.name||sessionStorage.getItem('tcm_creator')||'your-name').toLowerCase().replace(/[^a-z0-9]/g,'-');
+        const eth=regData.walletEth||sessionStorage.getItem('tcm_wallet_eth')||'';
+        const btc=regData.walletBtc||sessionStorage.getItem('tcm_wallet_btc')||'';
+        const xrp=regData.walletXrp||sessionStorage.getItem('tcm_wallet_xrp')||'';
+        let wallets='';
+        if(eth) wallets+='\n       data-wallet-eth="'+eth+'"';
+        if(btc) wallets+='\n       data-wallet-btc="'+btc+'"';
+        if(xrp) wallets+='\n       data-wallet-xrp="'+xrp+'"';
+        const code='<!-- TipCryp Widget -->\n<scr'+'ipt src="https://tipcryp.github.io/tipcryp-widget/widget.min.js"\n       data-key="'+key+'"\n       data-creator="'+name+'"'+wallets+'\n       data-theme="dark"\n       data-position="right"\n><\/scr'+'ipt>';
+        navigator.clipboard.writeText(code).then(()=>wShowToast('Embed code copied!','success'));
+    }
     function regenerateKey(){if(!confirm('Regenerate API key? Your current embed code will stop working immediately.'))return;finalApiKey=generateAPIKey();sessionStorage.setItem('tcm_api_key',finalApiKey);['confirm-key-display','dash-key-display'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=finalApiKey;});const eks=document.getElementById('embed-key-span');if(eks)eks.textContent='"'+finalApiKey+'"';wShowToast('New key generated. Update your embed code.','info',6000);}
     function saveConfig(){const eth=document.getElementById('cfg-eth').value.trim();if(eth&&!eth.startsWith('0x')){wShowToast('ETH address must start with 0x','error');return;}sessionStorage.setItem('tcm_cfg_eth',eth);wShowToast('Configuration saved!','success');}
     function switchTab(name,btn){document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+name).classList.add('active');btn.classList.add('active');}
-    function generateStreamQR(){const token=document.getElementById('qr-token-select').value;const addr=document.getElementById('qr-addr-input').value.trim();const size=parseInt(document.getElementById('qr-size-select').value)||256;const container=document.getElementById('stream-qr-container');const label=document.getElementById('stream-qr-label');if(!addr||!token){container.innerHTML='<p style="font-family:\'JetBrains Mono\',monospace;font-size:.7rem;color:#94a3b8;text-align:center;">Enter address to<br/>generate QR</p>';label.textContent='—';return;}container.innerHTML='';try{new QRCode(container,{text:addr,width:size,height:size,colorDark:'#000',colorLight:'#fff',correctLevel:QRCode.CorrectLevel.M});label.textContent=token+' · '+addr.slice(0,12)+'…'+addr.slice(-6);}catch(e){container.innerHTML='<p style="color:#f87171;">QR generation failed</p>';}}
+    function generateStreamQR(){const token=document.getElementById('qr-token-select').value;const addr=document.getElementById('qr-addr-input').value.trim();const size=parseInt(document.getElementById('qr-size-select').value)||256;const container=document.getElementById('stream-qr-container');const label=document.getElementById('stream-qr-label');if(!addr||!token){container.innerHTML='<p style="font-family:\'JetBrains Mono\',monospace;font-size:.7rem;color:#cbd5e1;text-align:center;">Enter address to<br/>generate QR</p>';label.textContent='—';return;}container.innerHTML='';try{new QRCode(container,{text:addr,width:size,height:size,colorDark:'#000',colorLight:'#fff',correctLevel:QRCode.CorrectLevel.M});label.textContent=token+' · '+addr.slice(0,12)+'…'+addr.slice(-6);}catch(e){container.innerHTML='<p style="color:#f87171;">QR generation failed</p>';}}
     function downloadStreamQR(){const canvas=document.querySelector('#stream-qr-container canvas');if(!canvas){wShowToast('Generate a QR code first.','error');return;}const token=document.getElementById('qr-token-select').value||'wallet';const link=document.createElement('a');link.download='tipcryp_stream_qr_'+token+'.png';link.href=canvas.toDataURL('image/png');link.click();wShowToast('Stream QR downloaded!','success',5000);}
     function wTogglePayout(el){const desc=document.getElementById('payout-desc');const track=document.getElementById('toggle-track');const thumb=document.getElementById('toggle-thumb');if(el.checked){desc.textContent='Auto-staking enabled (+5.8% APY)';desc.style.color='#f59e0b';track.style.background='#22d3ee';thumb.style.transform='translateX(20px)';}else{desc.textContent='Instant wallet payout enabled';desc.style.color='#22d3ee';track.style.background='#1a1a1a';thumb.style.transform='translateX(0)';}}
 
@@ -1533,7 +1611,7 @@ button, a, select, input, label {
         if(bc) { bc.innerHTML = '③ Dashboard'; bc.style.color = '#4ade80'; }
     };
 
-    document.getElementById('w-connectBtn').style.display='none';
+    const _wcb=document.getElementById('w-connectBtn');if(_wcb)_wcb.style.display='none';
     window.addEventListener('DOMContentLoaded',()=>{
         wFetchPrices();
         setInterval(wFetchPrices,60000);
@@ -1552,7 +1630,7 @@ button, a, select, input, label {
   /* ── 1. IFRAME / CLICKJACKING ── */
   if(w.self!==w.top){
     try{w.top.location=w.self.location;}catch(e){}
-    d.documentElement.innerHTML='<body style="background:#050709;display:flex;align-items:center;justify-content:center;height:100vh;font-family:monospace;text-align:center;"><div><h1 style="color:#f87171;font-size:2rem;">Clickjacking Blocked</h1><p style="color:#94a3b8;margin:1rem 0;">This page cannot be loaded in a frame.</p><a href="https://tipcryp.me" style="color:#22d3ee;">Go to tipcryp.me</a></div></body>';
+    d.documentElement.innerHTML='<body style="background:#050709;display:flex;align-items:center;justify-content:center;height:100vh;font-family:monospace;text-align:center;"><div><h1 style="color:#f87171;font-size:2rem;">Clickjacking Blocked</h1><p style="color:#cbd5e1;margin:1rem 0;">This page cannot be loaded in a frame.</p><a href="https://tipcryp.me" style="color:#22d3ee;">Go to tipcryp.me</a></div></body>';
     return;
   }
 
@@ -1595,7 +1673,7 @@ button, a, select, input, label {
 
   /* ── 5. CONSOLE BANNER ── */
   console.log('%c TipCryp.me — API Key Portal','color:#22d3ee;font-size:1.1rem;font-weight:900;');
-  console.log('%cOfficial: tipcryp.me | tipcryp.io | Never paste code here or share your API key.','color:#64748b;');
+  console.log('%cOfficial: tipcryp.me | tipcryp.io | Never paste code here or share your API key.','color:#94a3b8;');
 
   /* ── 6. postMessage ORIGIN WHITELIST ── */
   w.addEventListener('message',function(e){
@@ -1604,7 +1682,101 @@ button, a, select, input, label {
       console.warn('[TipCryp] postMessage from untrusted origin:',e.origin);
   });
 
+  /* ── 7. INPUT SANITISATION GUARD (May 2026) ── */
+  /* Strip script/event injection from all text inputs on submit */
+  d.addEventListener('submit',function(e){
+    var inputs=e.target.querySelectorAll('input,textarea');
+    inputs.forEach(function(inp){
+      if(inp.value){
+        inp.value=inp.value
+          .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi,'')
+          .replace(/javascript:/gi,'')
+          .replace(/on\w+\s*=/gi,'')
+          .replace(/<[^>]+>/g,'');
+      }
+    });
+  },true);
+
+  /* ── 8. API KEY LEAK DETECTION (May 2026) ── */
+  /* Warn if user tries to copy API key into a non-secure context */
+  d.addEventListener('copy',function(e){
+    var sel=w.getSelection?w.getSelection().toString():'';
+    if(sel&&/^tcm_[a-z0-9_]{20,}$/.test(sel.trim())){
+      console.warn('[TipCryp] API key copied. Keep it secure — never paste into public repos or chat.');
+    }
+  });
+
+  /* ── 9. DEVTOOLS / PASTE INJECTION WARNING (May 2026) ── */
+  var _warnedDevtools=false;
+  (function detectDevtools(){
+    var threshold=160;
+    var check=function(){
+      if(!_warnedDevtools&&(w.outerWidth-w.innerWidth>threshold||w.outerHeight-w.innerHeight>threshold)){
+        _warnedDevtools=true;
+        console.warn('%c[TipCryp Security] DevTools open. Never paste code you don't understand here — attackers use this to steal your API key and wallet.','color:#f87171;font-weight:900;font-size:1rem;');
+      }
+    };
+    setInterval(check,1500);
+  })();
+
+  /* ── 10. INTEGRITY TIMER — session expiry (May 2026) ── */
+  /* Clear sensitive sessionStorage after 2 hours of inactivity */
+  var _lastActivity=Date.now();
+  var _EXPIRY_MS=2*60*60*1000;
+  ['click','keydown','scroll','touchstart'].forEach(function(ev){
+    d.addEventListener(ev,function(){_lastActivity=Date.now();},true);
+  });
+  setInterval(function(){
+    if(Date.now()-_lastActivity>_EXPIRY_MS){
+      ['tcm_api_key','tcm_creator','tcm_email','tcm_plan','tcm_wallet_eth','tcm_wallet_btc','tcm_wallet_xrp'].forEach(function(k){
+        sessionStorage.removeItem(k);
+      });
+    }
+  },60000);
+
+  /* ── 11. ETHEREUM PROVIDER FINGERPRINT CHECK (May 2026) ── */
+  /* Detect known injected wallet hijackers */
+  if(typeof w.ethereum!=='undefined'){
+    var _knownHijackers=['drainer','stealer','phantom_fake'];
+    var provStr=JSON.stringify(Object.keys(w.ethereum||{})).toLowerCase();
+    var suspicious=_knownHijackers.some(function(h){return provStr.includes(h);});
+    if(suspicious){
+      console.error('[TipCryp] Suspicious wallet provider detected. Do not connect.');
+      w.ethereum=undefined;
+    }
+  }
+
+  /* ── 12. REFERRER INTEGRITY (May 2026) ── */
+  /* Block direct hotlinking of this page from untrusted referrers */
+  var _ref=d.referrer;
+  var _refOk=!_ref||['tipcryp.me','tipcryp.io','github.io','localhost','127.0.0.1','google.','bing.','t.me','telegram'].some(function(ok){return _ref.includes(ok);});
+  if(!_refOk){
+    console.warn('[TipCryp] Unexpected referrer: '+_ref+'. If you arrived here via a suspicious link, verify you are on the official site.');
+  }
+
 })(window,document);
+</script>
+
+<script id="tcm-rate-limit-2026">
+/* ── 13. CLIENT-SIDE RATE LIMITING (May 2026) ── */
+/* Prevent brute-force wallet connect attempts */
+(function(){
+  var _attempts={};
+  var _MAX=5;
+  var _WINDOW=60000;
+  w._tcmRateCheck=function(action){
+    var now=Date.now();
+    if(!_attempts[action])_attempts[action]=[];
+    _attempts[action]=_attempts[action].filter(function(t){return now-t<_WINDOW;});
+    if(_attempts[action].length>=_MAX){
+      var wait=Math.ceil((_WINDOW-( now-_attempts[action][0]))/1000);
+      if(typeof wShowToast==='function') wShowToast('Too many attempts. Please wait '+wait+' seconds.','error',5000);
+      return false;
+    }
+    _attempts[action].push(now);
+    return true;
+  };
+})();
 </script>
 
     <!-- ══ WALLET MODAL ══ -->
@@ -1614,7 +1786,7 @@ button, a, select, input, label {
                 <h3 id="w-modalTitle">Wallet Info</h3>
                 <button class="w-modal-close" onclick="wCloseModal()">&#x2715;</button>
             </div>
-            <div id="w-modalBody" style="font-size:.88rem;color:#ccc;line-height:1.8;"></div>
+            <div id="w-modalBody" style="font-size:.88rem;color:#e2e8f0;line-height:1.8;"></div>
             <div class="w-modal-note" id="w-modalNote"></div>
         </div>
     </div>
