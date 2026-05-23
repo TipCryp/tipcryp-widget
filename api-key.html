@@ -945,7 +945,7 @@ button, a, select, input, label {
       <p style="font-size:.84rem;color:#64748b;margin-bottom:18px;">Paste this single script tag anywhere in your HTML where you want the widget to appear.</p>
       <div class="code-block" id="embed-code">
         <span class="cm">&lt;!-- TipCryp Widget — tipcryp.me --&gt;</span><br/>
-        <span class="kw">&lt;script</span> <span class="str">src</span>=<span class="str">"https://tipcryp.me/widget.js"</span><br/>
+        <span class="kw">&lt;script</span> <span class="str">src</span>=<span class="str">"https://tipcryp.github.io/tipcryp-widget/widget.min.js"</span><br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">data-key</span>=<span class="str" id="embed-key-span">"tcm_•••••••••••••••"</span><br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">data-creator</span>=<span class="str" id="embed-name-span">"your-name"</span><br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">data-theme</span>=<span class="str">"dark"</span><br/>
@@ -1093,7 +1093,7 @@ button, a, select, input, label {
           <p style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--cyan);margin-bottom:8px;">STEP 1 — Add the script</p>
           <div class="code-block">
             <span class="cm">&lt;!-- Add before &lt;/body&gt; --&gt;</span><br/>
-            <span class="kw">&lt;script</span> <span class="str">src</span>=<span class="str">"https://tipcryp.me/widget.js"</span> <span class="str">data-key</span>=<span class="str">"YOUR_KEY"</span><span class="kw">&gt;&lt;/script&gt;</span>
+            <span class="kw">&lt;script</span> <span class="str">src</span>=<span class="str">"https://tipcryp.github.io/tipcryp-widget/widget.min.js"</span> <span class="str">data-key</span>=<span class="str">"YOUR_KEY"</span><span class="kw">&gt;&lt;/script&gt;</span>
           </div>
         </div>
         <div>
@@ -1396,7 +1396,7 @@ button, a, select, input, label {
         txLink.textContent=txHash?txHash.slice(0,20)+'…':'—';
         if(txHash){txLink.href='https://etherscan.io/tx/'+txHash;}
         const safeName=regData.name.toLowerCase().replace(/[^a-z0-9]/g,'-');
-        const embedCode='<!-- TipCryp Widget -->\n<script src="https://tipcryp.me/widget.js"\n        data-key="'+finalApiKey+'"\n        data-creator="'+safeName+'"\n        data-theme="dark"\n        data-position="right"\n><\/scr'+'ipt>';
+        const embedCode='<!-- TipCryp Widget -->\n<script src="https://tipcryp.github.io/tipcryp-widget/widget.min.js"\n        data-key="'+finalApiKey+'"\n        data-creator="'+safeName+'"\n        data-theme="dark"\n        data-position="right"\n><\/scr'+'ipt>';
         document.getElementById('confirm-embed-code').textContent=embedCode;
         document.querySelector('main').style.display='none';
         document.getElementById('confirm-page').style.display='block';
@@ -1497,7 +1497,7 @@ button, a, select, input, label {
         window.scrollTo({top:0,behavior:'smooth'});
     }
 
-    function copyEmbed(){const key=finalApiKey||sessionStorage.getItem('tcm_api_key')||'YOUR_KEY';const name=(regData.name||sessionStorage.getItem('tcm_creator')||'your-name').toLowerCase().replace(/[^a-z0-9]/g,'-');const code='<!-- TipCryp Widget -->\n<scr'+'ipt src="https://tipcryp.me/widget.js"\n       data-key="'+key+'"\n       data-creator="'+name+'"\n       data-theme="dark"\n       data-position="right"\n><\/scr'+'ipt>';navigator.clipboard.writeText(code).then(()=>wShowToast('Embed code copied!','success'));}
+    function copyEmbed(){const key=finalApiKey||sessionStorage.getItem('tcm_api_key')||'YOUR_KEY';const name=(regData.name||sessionStorage.getItem('tcm_creator')||'your-name').toLowerCase().replace(/[^a-z0-9]/g,'-');const code='<!-- TipCryp Widget -->\n<scr'+'ipt src="https://tipcryp.github.io/tipcryp-widget/widget.min.js"\n       data-key="'+key+'"\n       data-creator="'+name+'"\n       data-theme="dark"\n       data-position="right"\n><\/scr'+'ipt>';navigator.clipboard.writeText(code).then(()=>wShowToast('Embed code copied!','success'));}
     function regenerateKey(){if(!confirm('Regenerate API key? Your current embed code will stop working immediately.'))return;finalApiKey=generateAPIKey();sessionStorage.setItem('tcm_api_key',finalApiKey);['confirm-key-display','dash-key-display'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=finalApiKey;});const eks=document.getElementById('embed-key-span');if(eks)eks.textContent='"'+finalApiKey+'"';wShowToast('New key generated. Update your embed code.','info',6000);}
     function saveConfig(){const eth=document.getElementById('cfg-eth').value.trim();if(eth&&!eth.startsWith('0x')){wShowToast('ETH address must start with 0x','error');return;}sessionStorage.setItem('tcm_cfg_eth',eth);wShowToast('Configuration saved!','success');}
     function switchTab(name,btn){document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+name).classList.add('active');btn.classList.add('active');}
